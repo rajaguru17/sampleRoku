@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Mainscene" extends="Scene">
+  <interface>
+    
+  </interface>
+   <script type="text/brightscript" uri="Mainscene.brs" />
+   <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+  <children>
+     <Rectangle
+      id="background"
+    />
+    <Label
+      id="label"
+      text="Hello, World!"
+      translation="[100, 100]"
+      color="0xFFFFFFFF"
+      font="font:MediumBoldSystemFont"
+    />
+    <Group id="testGroup" translation="[100, 200]">
+      <Label
+        id="testLabel"
+        text="This is a test label sfdsdfs fsfsf. sfsdf sfsf sfsfsfsfs fsdfsd"
+        color="0xFFFFFFFF"
+        font="font:MediumBoldSystemFont"
+      />
+        <Label
+        id="testLabel2"
+        text="This is a test label 2"
+        color="0xFFFFFFFF"
+        font="font:MediumBoldSystemFont" translation="[250, 0]"
+      />    
+    </Group>
+    <LayoutGroup id="layoutGroup" translation="[100, 300]" layoutDirection="horiz" itemSpacings="[50,100]">
+      <Label
+        id="layoutLabel1"
+        text="Layout Label 1"
+        color="0xFFFFFFFF"
+        font="font:MediumBoldSystemFont"
+      />
+      <Label
+        id="layoutLabel2"
+        text="Layout Label 2"
+        color="0xFFFFFFFF"
+        font="font:MediumBoldSystemFont"
+      />
+      <Label
+        id="layoutLabel3"
+        text="Layout Label 3"
+        color="0xFFFFFFFF"
+        font="font:MediumBoldSystemFont"
+        />
+    </LayoutGroup>
+    <Poster
+      id="poster"
+      uri="pkg:/images/rsgde_splash_hd.jpg"
+      translation="[100, 500]"
+      height="112" width="200"
+    />
+  </children>
+</component>
