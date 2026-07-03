@@ -1,0 +1,6 @@
+/out/
+*.zip
+launch.json
+.vscode/*
+!.vscode/launch.json
+*.DS_store

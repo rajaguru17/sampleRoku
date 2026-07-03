@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+ 
+<component name = "RowItem" extends = "Group" >
+ 
+  <interface > 
+    <field id = "itemContent" type = "node" onChange = "showcontent"/>
+    <field id = "focusPercent" type = "float" onChange = "showfocus"/> 
+    <field id = "rowFocusPercent" type = "float" onChange = "showrowfocus"/>
+  </interface>
+ 
+  <script type = "text/brightscript" uri = "RowItem.brs" />
+
+  <children >
+    
+    <Poster 
+      id = "itemPoster" 
+      translation = "[ 0, 0 ]" 
+      width = "320" 
+      height = "180" 
+       >
+
+    </Poster>
+
+    <Label 
+      id = "itemLabel" 
+      translation = "[ 20, 264 ]" 
+      horizAlign = "right" 
+      width = "492" 
+      opacity = "0.0"/>
+
+  </children>
+
+</component>
