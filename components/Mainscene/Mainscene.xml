@@ -72,7 +72,20 @@
       showRowLabel = "[ true ]" 
       drawFocusFeedback = "true" 
       numRows = "2"
-      rowLabelOffset="[ [ 0, 20 ] ]"
+      rowLabelOffset="[ [ 0, 20 ] ]" visible = "false"
+    />
+
+    <RowList
+      id="rowList1"
+      translation="[100, 100]"
+      itemComponentName="RowItemNode"
+      itemSize="[1920, 1080]"
+      itemSpacing="[0,80]"
+      rowItemSpacing="[[20,20],[20,20]]"
+      showRowLabel = "[ true ]" 
+      drawFocusFeedback = "true" 
+      numRows = "2"
+      rowLabelOffset="[ [ 0, 20 ],[ 0, 20 ] ]"
     />
   </children>
 </component>

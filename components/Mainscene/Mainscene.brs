@@ -4,6 +4,9 @@ function init()
     m.rowList = m.top.findNode("rowList")
     setRowItems()
     m.rowList.setFocus(true)
+    m.rowList1 = m.top.findNode("rowList1")
+    setRow()
+    m.rowList1.setFocus(true)
     ' background = m.top.findNode("background")
     ' background.color = "0x000000"
     ' background.width = 1920
@@ -72,4 +75,27 @@ function setRowItems()
         end for
     end for
     m.rowList.content = contentNode
+end function
+
+function setRow()
+    rowData = rowItemConfigWithSizes()
+    contentNode = createObject("roSGNode", "ContentNode")
+    rowHeights = []
+    rowItemSize = []
+    for each rowItem in rowData
+        row = contentNode.createChild("ContentNode")
+        row.title = rowItem.title
+        rowHeights.push(rowItem.height)
+        rowItemSize.push([rowItem.width, rowItem.height])
+        for each item in rowItem.items
+            itemNode = row.createChild("CustomContentNode")
+            itemNode.title = item.text
+            itemNode.HDPosterUrl = item.posterurl
+            itemNode.width = rowItem.width
+            itemNode.height = rowItem.height
+        end for
+    end for
+    m.rowList1.rowHeights = rowHeights
+    m.rowList1.rowItemSize = rowItemSize
+    m.rowList1.content = contentNode
 end function
