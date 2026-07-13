@@ -5,7 +5,7 @@
   </interface>
    <script type="text/brightscript" uri="Mainscene.brs" />
    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
-   <script type="text/brightscript" uri="pkg:/source/rowListConfig.brs" />
+   <script type="text/brightscript" uri="pkg:/source/config.brs" />
   <children>
      <Rectangle
       id="background"
@@ -81,11 +81,21 @@
       itemComponentName="RowItemNode"
       itemSize="[1920, 1080]"
       itemSpacing="[0,80]"
-      rowItemSpacing="[[20,20],[20,20]]"
       showRowLabel = "[ true ]" 
+      rowFocusAnimationStyle="fixedFocus"
       drawFocusFeedback = "true" 
-      numRows = "2"
-      rowLabelOffset="[ [ 0, 20 ],[ 0, 20 ] ]"
+      numRows = "3"
     />
+
+    <MarkupGrid
+      id = "movieGrid"
+      itemComponentName = "GridItem"
+      translation = "[50,50]"
+      itemSize = "[100,60]"
+      itemSpacing = "[20,20]"
+      numColumns = "4"
+     
+    />
+
   </children>
 </component>

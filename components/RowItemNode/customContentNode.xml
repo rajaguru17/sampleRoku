@@ -3,5 +3,7 @@
 	<interface>
     <field id="height" type="integer"/>
     <field id="width" type="integer" />
+    <field id="itemData" type="assocArray"/>
+    <field id = "isViewAll" type = "boolean" value = "false"/>
 	</interface>
 </component>

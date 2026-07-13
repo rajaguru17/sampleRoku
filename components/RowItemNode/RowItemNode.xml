@@ -4,32 +4,58 @@
  
 <component name = "RowItemNode" extends = "Group" >
  
-  <interface > 
-    <field id = "itemContent" type = "node" onChange = "showcontent"/>
-    <field id = "focusPercent" type = "float" onChange = "showfocus"/> 
-    <field id = "rowFocusPercent" type = "float" onChange = "showrowfocus"/>
-  </interface>
- 
-  <script type = "text/brightscript" uri = "RowItemNode.brs" />
+<interface > 
+  <field id = "itemContent" type = "node" onChange = "showcontent"/>
+  <field id = "focusPercent" type = "float" onChange = "showfocus"/> 
+  <field id = "rowFocusPercent" type = "float" onChange = "showrowfocus"/>
 
-  <children >
-    
-    <Poster 
-      id = "itemPoster" 
-      translation = "[ 0, 0 ]" 
-      width = "320" 
-      height = "180" 
-       >
+</interface>
 
-    </Poster>
+<script type = "text/brightscript" uri = "RowItemNode.brs" />
+  <script type="text/brightscript" uri="pkg:/source/config.brs" />
 
-    <Label 
-      id = "itemLabel" 
-      translation = "[ 20, 264 ]" 
-      horizAlign = "right" 
-      width = "492" 
-      opacity = "0.0"/>
+<children >
+  <Poster 
+    id = "itemPoster" 
+    translation = "[ 0, 0 ]" 
+    width = "320" 
+    height = "180" 
+      >
 
-  </children>
+  </Poster>
 
+  <Label 
+    id = "itemLabel" 
+    translation = "[ 20, 264 ]" 
+    horizAlign = "right" 
+    width = "492" 
+    opacity = "0.0"
+  />
+  <Label
+    id = "isViewAll"
+    translation = "[0,0]"
+    horizAlign  = "center"
+    vertAlign = "center"
+  />
+  <Group id = "fullBadge" >
+    <Rectangle 
+      id = "badge"
+      height = "20"
+      width = "50"
+    />
+    <Label
+      id = "badgeText"
+      horizAlign = "center" 
+      vertAlign = "center"
+      height = "20"
+      width = "50" 
+      color = "0x000000FF"
+    />
+   </Group>
+
+   <Label
+      id = "dummyLabel"
+      visible = "false"
+    />
+</children>
 </component>

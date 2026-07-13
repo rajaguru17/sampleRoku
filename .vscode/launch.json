@@ -5,12 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "BrightScript Debug: Launch",
             "type": "brightscript",
             "request": "launch",
-            "name": "BrightScript Debug: Launch",
-            "stopOnEntry": false,
-            "host": "192.168.1.34",
-            "password":"abcd",
+            "host": "10.1.10.138",
+            "password": "abcd",
             "rootDir": "${workspaceFolder}",
             "files": [
                 "manifest",
