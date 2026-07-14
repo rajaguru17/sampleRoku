@@ -10,83 +10,6 @@
      <Rectangle
       id="background"
     />
-    <!-- <Group id="labelGroup" translation="[100, 50]">
-      
-    </Group> -->
-    <!-- <Label
-      id="label"
-      text="Hello, World!"
-      translation="[100, 100]"
-      color="0xFFFFFFFF"
-      font="font:MediumBoldSystemFont"
-    /> -->
-    <!-- <Group id="testGroup" translation="[100, 200]">
-      <Label
-        id="testLabel"
-        text="This is a test label sfdsdfs fsfsf. sfsdf sfsf sfsfsfsfs fsdfsd"
-        color="0xFFFFFFFF"
-        font="font:MediumBoldSystemFont"
-      />
-        <Label
-        id="testLabel2"
-        text="This is a test label 2"
-        color="0xFFFFFFFF"
-        font="font:MediumBoldSystemFont" translation="[250, 0]"
-      />    
-    </Group>
-    <LayoutGroup id="layoutGroup" translation="[100, 300]" layoutDirection="vert" itemSpacings="[10]"> -->
-      <!-- <Label
-        id="layoutLabel1"
-        text="Layout Label 1"
-        color="0xFFFFFFFF"
-        font="font:MediumBoldSystemFont"
-      />
-      <Label
-        id="layoutLabel2"
-        text="Layout Label 2"
-        color="0xFFFFFFFF"
-        font="font:MediumBoldSystemFont"
-      />
-      <Label
-        id="layoutLabel3"
-        text="Layout Label 3"
-        color="0xFFFFFFFF"
-        font="font:MediumBoldSystemFont"
-        /> -->
-    <!-- </LayoutGroup> -->
-    <!-- <Poster
-      id="poster"
-      uri="pkg:/images/rsgde_splash_hd.jpg"
-      translation="[100, 500]"
-      height="112" width="200"
-    /> -->
-    <RowList
-      id="rowList"
-      translation="[100, 100]"
-      itemComponentName="RowItem"
-      itemSize="[1920, 1080]"
-      rowItemSize = "[ [320, 180] ]" 
-      rowHeights="[ 220 ]"
-      itemSpacing="[0,40]"
-      rowItemSpacing="[[20,20]]"
-      showRowLabel = "[ true ]" 
-      drawFocusFeedback = "true" 
-      numRows = "2"
-      rowLabelOffset="[ [ 0, 20 ] ]" visible = "false"
-    />
-
-    <RowList
-      id="rowList1"
-      translation="[100, 100]"
-      itemComponentName="RowItemNode"
-      itemSize="[1920, 1080]"
-      itemSpacing="[0,80]"
-      showRowLabel = "[ true ]" 
-      rowFocusAnimationStyle="fixedFocus"
-      drawFocusFeedback = "true" 
-      numRows = "3"
-    />
-
     <MarkupGrid
       id = "movieGrid"
       itemComponentName = "GridItem"
@@ -96,6 +19,6 @@
       numColumns = "4"
      
     />
-
+    <Group id="screenContainer" />
   </children>
 </component>
