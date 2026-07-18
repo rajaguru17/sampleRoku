@@ -4,6 +4,7 @@ function init()
     m.movieGrid = m.top.findNode("movieGrid")
     setMovieGrid()
     m.screenContainer = m.top.findNode("screenContainer")
+
     showHomeScreen()
 
     ' background = m.top.findNode("background")
@@ -20,11 +21,13 @@ end function
 
 function showHomeScreen()
     screen = CreateObject("roSGNode", "Homescreen")
-    rowData = rowItemConfigWithSizes()
-    screen.rowData = rowData
+    screen.rowData = rowItemConfigWithSizes()
+    'screen.rowData = rowData
     screen.observeField("keyPress", "onKeyPress")
     pushToStack(screen)
 end function
+
+
 
 function pushToStack(screen)
     m.screenContainer.appendChild(screen)

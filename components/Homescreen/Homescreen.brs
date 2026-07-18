@@ -13,7 +13,7 @@ function setRow()
     rowItemSpacing = []
     RowCounterArr = []
     
-    print rowData
+    'print rowData
     for each rowItem in rowData
         print rowItem
         row = contentNode.createChild("ContentNode")

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="Homescreen" extends="Group">
+
   <interface>
     <field id="rowData" type="array" alwaysNotify="true" onChange="setRow" />
     <field id="keyPress" type="string" alwaysNotify="true"/>
     <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
   </interface>
+
    <script type="text/brightscript" uri="Homescreen.brs" />
    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
    <script type="text/brightscript" uri="pkg:/source/config.brs" />
+
   <children>
     <RowList
       id="rowList1"
@@ -20,8 +23,6 @@
       drawFocusFeedback = "true" 
       numRows = "3"
     />
-
-    
-
   </children>
+  
 </component>

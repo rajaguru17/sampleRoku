@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Profilescreen" extends="Group">
+    <interface>
+        
+    </interface>
+
+    <script type="text/brightscript" uri="Profilescreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/config.brs" />
+
+    <children>
+        <Rectangle id = "profilesBackground"/>
+        <Group id = "profileBackgroundContent">
+            <Poster
+                uri = ""
+                width = "1920"
+                height = "1080"
+                translation = "[0,0]"
+            />
+            <text
+                id = "metaData"
+            />
+        </Group>
+        <Group id = "profileTopLeftLogo">
+            <Poster
+                uri = "pkg:/images/netflix_logo.jpg"
+                width = "60"
+                height = "40"
+                translation = "[100,20]"
+            />
+            <text
+                id = "profileChooseProfileInfo"
+                width = "60"
+                height = "20"
+                translation = "[100,60]"
+                text = "Choose a Profile"
+                color = "#FFFFFF"
+            />
+        </Group>
+        <MarkupGrid 
+            id = "profilesMarkUpGrid"
+            itemComponentName = "profilesGridItem"
+            translation = "[120,100]"
+            numRows = "5"
+            itemSize = "[40,40]"
+            itemSpacing = "[20,20]"
+        />
+        
+    </children>
+</component>

@@ -97,3 +97,11 @@ function badge() as object
     }
 end function
 
+function profilesGridConfig() as object
+    return[
+        {"text": "", "image":"pkg:/images/profilePic/image1.jpg"}
+        {"text": "", "image":"pkg:/images/profilePic/image2.jpg"}
+        {"text": "", "image":"pkg:/images/profilePic/image3.jpg"}
+        {"text": "", "image":"pkg:/images/profilePic/image4.jpg"}
+    ]
+end function
