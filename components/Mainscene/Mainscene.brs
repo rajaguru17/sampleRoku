@@ -5,7 +5,8 @@ function init()
     setMovieGrid()
     m.screenContainer = m.top.findNode("screenContainer")
 
-    showHomeScreen()
+    ' showHomeScreen()
+    showProfileScreen()
 
     ' background = m.top.findNode("background")
     ' background.color = "0x000000"
@@ -27,6 +28,13 @@ function showHomeScreen()
     pushToStack(screen)
 end function
 
+function showProfileScreen()
+    screen = CreateObject("roSGNode", "Profilescreen")
+    'screen.rowData = rowItemConfigWithSizes()
+    'screen.rowData = rowData
+    'screen.observeField("keyPress", "onKeyPress")
+    pushToStack(screen)
+end function
 
 
 function pushToStack(screen)
