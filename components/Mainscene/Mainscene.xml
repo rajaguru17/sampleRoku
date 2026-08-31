@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="Mainscene" extends="Scene">
+
   <interface>
     
   </interface>
+
    <script type="text/brightscript" uri="Mainscene.brs" />
-   <script type="text/brightscript" uri="pkg:/source/utils.brs" />
    <script type="text/brightscript" uri="pkg:/source/config.brs" />
+   <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+
   <children>
-     <Rectangle
+    <Rectangle
       id="background"
     />
     <MarkupGrid
       id = "movieGrid"
       itemComponentName = "GridItem"
       translation = "[50,50]"
-      itemSize = "[100,60]"
+      itemSize = "[190,60]"
       itemSpacing = "[20,20]"
-      numColumns = "4"
-     
+      numColumns = "6"
     />
+    <Group 
+      id = "profileIcon"
+      translation = "[1600,50]"
+    >
+      <Poster 
+        id = "iconImage"
+        height = "50"
+        width = "50"
+      />
+      <Label 
+        id = "userName"
+        translation = "[70,0]"
+      />
+      <Label 
+        id = "switchProfile"
+        translation = "[70,30]"
+        text = "Switch Profile"
+      />
+    </Group>
     <Group id="screenContainer" />
-  </children>
+    <Label
+        id = "counter"
+        translation = "[1400,150]"
+        color = "#ffffff"
+    />
+    
+ </children>
+  
 </component>

@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="Profilescreen" extends="Group">
     <interface>
-        
+        <field id="currentSelectionData" type="assocarray" />
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
     </interface>
 
     <script type="text/brightscript" uri="Profilescreen.brs" />
     <script type="text/brightscript" uri="pkg:/source/config.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    
 
     <children>
         <Rectangle id = "profilesBackground"/>
         <Group id = "profileBackgroundContent">
             <Poster
-                uri = ""
+                id = "profileBackgroundPicture" 
                 width = "1920"
                 height = "1080"
                 translation = "[0,0]"
+                loadWidth = "1920.0"
+                loadHeight = "1080.0"
+                loadDisplayMode = "scaleToFill"
             />
-            <text
-                id = "metaData"
-            />
+            <LayoutGroup  id = "metaData"
+                    translation = "[1400,700]"
+                    itemSpacings = "[75,50,50]"
+                    >
+                <Label
+                    id = "metaDataTitle"
+                    width = "500"
+                    horizAlign = "Right"
+                    vertAlign = "Top"
+                />
+                <Label
+                    id = "metaDataGenre"
+                    width = "500"
+                    horizAlign = "Right"
+                    vertAlign = "Center"
+                />
+                <Label
+                    id = "metaDataHighlight"
+                    width = "500"
+                    horizAlign = "Right"
+                    vertAlign = "Bottom"
+                />
+            </LayoutGroup>
         </Group>
         <Group id = "profileTopLeftLogo">
             <Poster
-                uri = "pkg:/images/netflix_logo.jpg"
-                width = "60"
-                height = "40"
-                translation = "[100,20]"
+                uri = "pkg:/images/netflix_logo.png"
+                width = "230"
+                height = "80"
+                translation = "[60,20]"
+                loadHeight = "80.0"
+                loadWidth = "230.0"
+                loadDisplayMode = "scaleToFill"
             />
-            <text
+            <Label
                 id = "profileChooseProfileInfo"
-                width = "60"
-                height = "20"
-                translation = "[100,60]"
+                width = "250"
+                translation = "[90,100]"
                 text = "Choose a Profile"
                 color = "#FFFFFF"
             />
         </Group>
         <MarkupGrid 
             id = "profilesMarkUpGrid"
-            itemComponentName = "profilesGridItem"
-            translation = "[120,100]"
-            numRows = "5"
-            itemSize = "[40,40]"
+            itemComponentName = "ProfileGridItem"
+            translation = "[100,150]"
+            itemSize = "[300,150]"
             itemSpacing = "[20,20]"
+            numRows = "5"
+            vertFocusAnimationStyle = "floatingFocus"
+            drawFocusFeedback = "false"
         />
-        
+        <Timer  
+            id = "sliderTimer"
+            duration = "10"
+            repeat = "true"
+        />
     </children>
 </component>

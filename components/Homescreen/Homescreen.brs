@@ -1,8 +1,12 @@
 function init()
     m.rowList1 = m.top.findNode("rowList1")
     m.rowList1.setFocus(true)
+    m.counter = m.top.findNode("counter")
 end function
 
+' function showCounter()
+'     m.counter.text = "Clicks = " + m.counterValue.toStr()
+' end function
 
 function setRow()
     rowData = m.top.rowData
@@ -13,9 +17,8 @@ function setRow()
     rowItemSpacing = []
     RowCounterArr = []
     
-    'print rowData
     for each rowItem in rowData
-        print rowItem
+        ' print rowItem
         row = contentNode.createChild("ContentNode")
             row.title = rowItem.title
             rowHeights.push(rowItem.height)
@@ -40,6 +43,7 @@ function setRow()
                 itemNode.title = item.text
                 itemNode.HDPosterUrl = item.posterurl
                 itemNode.itemData = item 
+                itemNode.isViewAll = false
             end if       
         end for
        end for
@@ -51,7 +55,42 @@ function setRow()
     m.rowList1.showRowCounter = RowCounterArr
     m.rowList1.content = contentNode
 
+    m.rowList1.observeField("rowItemSelected","onRowItemSelected")
+    print "It is entering setRow"
 end function
+
+function onRowItemSelected()
+    currentRowItemIndex = m.rowList1.rowItemSelected
+    rowIndex = currentRowItemIndex[0]
+    rowItemIndex = currentRowItemIndex[1]
+    rowNode = m.rowList1.content.getChild(rowIndex) 'The row
+    rowItemClicked = rowNode.getChild(rowItemIndex) 'The rowChild placeholder
+    rowItemClickedInfo = rowItemClicked.itemData 'The rowChild data
+    rowInfo = getRowItems(rowNode.title) 'All the children of that row
+
+    ' print "rowNode=",rowNode
+    ' print "rowItemClicked=",rowItemClicked
+    ' print "rowClickedInfo=",rowItemClickedInfo
+    ' print "rowInfo=",rowInfo
+    
+    if rowItemClickedInfo.tags = "LIVE"
+        m.top.videoContentData = {"title": rowItemClickedInfo.id, "url": "https://lorem.video/720p", "streamformat": "mp4","LIVE":True}
+    else if rowItemClicked.isViewAll = true
+        m.top.viewMoreData = {"title":rowNode.title,"rowInfo":rowInfo}
+    else
+        m.top.detailsData = {"title":rowItemClickedInfo.id, "image":rowItemClickedInfo.posterurl}
+    end if
+    print "this is rowItemSelected"
+end function
+
+function getRowItems(selectedRow)
+    for each item in m.top.rowData
+        if item.title = selectedRow
+            return item.items
+        end if
+    end for
+end function
+
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     if press

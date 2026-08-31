@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name="RAF" extends="Task">
+
+    <interface>
+        
+    </interface>
+
+    <script type="text/brightscript" uri="RAF.brs" />
+
+    
+    
+</component>

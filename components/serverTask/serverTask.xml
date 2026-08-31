@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="serverTask" extends="Task">
+
+    <interface>
+        <field id="showID" type="string" alwaysNotify = "true" />
+        <field id="searchQuery" type="string" />
+        <field id="responseData" type="assocarray" />
+    </interface>
+
+    <script type="text/brightscript" uri="serverTask.brs" />
+    
+</component>

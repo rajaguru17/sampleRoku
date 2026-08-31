@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name="Detailsscreen" extends="Group">
+
+    <interface>
+        <field id = "detailsData" type="assocarray" onChange = "setDetailsScreen" alwaysNotify = "true" />
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id="videoContentData" type="assocarray" />
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
+        
+        
+    </interface>
+    
+    <script type="text/brightscript" uri="Detailsscreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/config.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+
+    <children>
+        <Poster 
+            id = "detailsBackground"
+            translation = "[0,120]"
+            height = "960"
+            width = "1920"
+        />
+        <Label
+            id = "detailsTitle"
+            translation = "[50,200]"
+            font = "font:LargeBoldSystemFont"
+        />
+        <Label 
+            id = "detailsDescription"
+            translation = "[300,810]"
+            width = "1000"
+            wrap = "true"
+            maxLines = "4"
+        />
+        <MarkupGrid
+            id = "detailsButtonsGrid"
+            itemComponentName = "detailsButtonsGridItem"
+            translation = "[50,800]"
+            itemSize = "[200,40]"
+            itemSpacing = "[20,20]"
+            numRows = "3"
+            drawFocusFeedback = "true"
+            vertFocusAnimationStyle = "floatingFocus"
+        />
+    </children>
+</component>

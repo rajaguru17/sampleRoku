@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="searchScreen" extends="Group">
+    <interface>
+
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id="detailsData" type="assocarray"/>
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
+    </interface>
+    <script type="text/brightscript" uri="searchScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <children>
+        <Rectangle
+            id = "searchScreenBackground"
+            translation = "[0,120]"
+            width = "1920"
+            height = "930"
+            color = "#000000"
+        />
+        <MiniKeyboard
+            id = "searchMiniKeyboard"
+            translation = "[50,200]"
+            keyColor = "#ffffff"
+            focusedKeyColor = "#000000"
+        />
+        <MarkupGrid
+            id = "allContentGrid"
+            itemComponentName = "viewMoreGridItem"
+            translation = "[650,200]"
+            itemSize = "[400,200]"
+            itemSpacing = "[20,20]"
+            numColumns  = "3"
+            numRows = "7"
+            vertFocusAnimationStyle = "floatingFocus"
+        />
+    </children>
+</component>

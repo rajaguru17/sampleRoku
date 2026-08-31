@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name="detailsButtonsGridItem" extends="Group">
+    <interface>
+        <field id = "focusPercent" type = "float" onChange = "showfocus" alwaysNotify = "true"/>
+    <field id = "gridHasFocus" type = "boolean" onChange = "showfocus" alwaysNotify = "true"/>
+    <field id = "itemContent" type = "node" onChange = "showcontent"/>
+    </interface>
+    <script type="text/brightscript" uri="detailsButtonsGridItem.brs" />
+    
+    <children>
+        <Rectangle id = "detailsGridItemBackground" width = "200" height = "40"/> 
+        <Label 
+            id = "detailsGridItemLabel" 
+            translation = "[0,0]" 
+            height = "40"
+            width = "200"
+            color = "#FFFFFF"
+            horizAlign = "Center"
+            vertAlign = "Center" 
+            opacity = "1.0"
+        />
+    </children>
+</component>

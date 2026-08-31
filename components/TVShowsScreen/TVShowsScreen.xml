@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name="TVShowsScreen" extends="Group">
+
+    <interface>
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id="showID" type="string"  alwaysNotify="true"/>
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
+    </interface>
+    
+    <script type="text/brightscript" uri="TVShowsScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    
+    <children>
+        <Rectangle id = "tvShowsScreenBackground" 
+            translation = "[0,120]"
+            width = "1920"
+            height = "960"
+            color = "#000000"
+        />
+        <Label 
+            id = "TVShowsTitle"
+            translation = "[50,140]"
+            Text = "TV Shows"
+        />
+        <MarkupGrid
+            id = "tvShowsGrid"
+            itemComponentName = "Viewmoregriditem"
+            translation = "[50,180]"
+            itemSize = "[400,200]"
+            itemSpacing = "[20,20]"
+            numColumns  = "4"
+            numRows = "4"
+            vertFocusAnimationStyle = "floatingFocus"
+        />
+    </children>
+
+</component>

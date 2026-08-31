@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Moviesscreen" extends="Group">
+
+    <interface>
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id="detailsData" type="assocarray"/>
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
+    </interface>
+
+    <script type="text/brightscript" uri="Moviesscreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+
+    <children>
+        <Rectangle
+            id = "moviesScreenBackground"
+            translation = "[0,150]"
+            width = "1920"
+            height = "930"
+            color = "#000000"
+        />
+        <Group id = "theaterDisplay"
+                translation = "[60,120]"
+        >
+            <Poster
+            id = "theaterDisplayPicture"
+            translation = "[0,0]"
+            width = "1800"
+            height = "650"
+            loadWidth = "1800.0"
+            loadHeight = "650.0"
+            loadDisplayMode = "scaleToFill"
+            />
+            <Label
+            id = "theaterTitle"
+            translation = "[20,20]"
+            width = "500"
+            horizAlign = "Left"
+            vertAlign = "Top"
+            />
+        </Group>
+        <MarkupGrid
+            id = "moviesScreenGrid"
+            itemComponentName = "viewMoreGridItem"
+            translation = "[150,800]"
+            itemSize = "[400,200]"
+            itemSpacing = "[20,20]"
+            numColumns  = "4"
+            numRows = "7"
+            focusable = "true"
+            vertFocusAnimationStyle = "fixedFocus"
+        />
+    </children>
+
+</component>

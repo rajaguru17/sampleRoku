@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name = "ProfileGridItem" extends = "Group" >
+
+    <interface>
+        <field id = "itemContent"  type =  "node"   onChange = "showcontent" />
+        <field id = "focusPercent" type = "float" onChange = "showfocus" alwaysNotify = "true"/>
+        <field id = "gridHasFocus" type = "boolean" onChange = "showfocus" alwaysNotify = "true"/>
+    </interface>
+
+    <script type="text/brightscript" uri="ProfileGridItem.brs" />
+    <script type="text/brightscript" uri="pkg:/source/config.brs" />
+
+    <children>
+        
+        <Group id = "profileItem">
+            <Rectangle id = "profileBorder"
+                translation = "[0,0]"
+                height = "150"
+                width = "150"
+            />
+            <Poster
+            id = "profileItemPoster"
+            translation = "[5,5]"
+            height = "140"
+            width = "140"
+            />
+            <Label
+            id = "profileItemLabel"
+            translation = "[150,75]"
+            />
+        </Group>
+    </children>
+</component>

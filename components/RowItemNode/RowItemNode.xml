@@ -12,7 +12,7 @@
 </interface>
 
 <script type = "text/brightscript" uri = "RowItemNode.brs" />
-  <script type="text/brightscript" uri="pkg:/source/config.brs" />
+<script type="text/brightscript" uri="pkg:/source/config.brs" />
 
 <children >
   <Poster 
@@ -20,7 +20,10 @@
     translation = "[ 0, 0 ]" 
     width = "320" 
     height = "180" 
-      >
+    loadHeight = "180.0"
+    loadWidth = "320.0"
+    loadDisplayMode = "scaleToFill"
+  >
 
   </Poster>
 

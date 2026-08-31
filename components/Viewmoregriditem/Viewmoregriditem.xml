@@ -1,0 +1,31 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name="viewMoreGridItem" extends="Group">
+
+    <interface>
+        <field id = "itemContent"  type =  "node"   onChange = "showcontent" />
+        <field id = "focusPercent" type = "float" onChange = "showfocus" alwaysNotify = "true"/>
+        <field id = "gridHasFocus" type = "boolean" onChange = "showfocus" alwaysNotify = "true"/>
+    </interface>
+
+    <script type="text/brightscript" uri="Viewmoregriditem.brs" />
+
+    <children>
+        <Group id = "viewMoreItem">
+            <poster
+                id = "viewMoreGridItemPoster"
+                translation = "[0,0]"
+                width = "400"
+                height = "200"
+                loadHeight = "400.0"
+                loadWidth = "200.0"
+                loadDisplayMode = "scaleToFill"
+            />
+            <Label
+                id = "viewMoreGridItemLabel"
+                translation = "[10,170]"
+                color = "#ffffff"
+            />
+        </Group>
+    </children>    
+</component>

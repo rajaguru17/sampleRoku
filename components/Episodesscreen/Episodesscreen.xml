@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name="Episodesscreen" extends="Group">
+
+    <interface>
+        <field id="showID" type="string" alwaysNotify="true"  onChange = "onShowID"/>
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id="videoContentData" type="assocarray" />
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
+    </interface>
+
+    <script type="text/brightscript" uri="Episodesscreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+
+    <children>
+        <Rectangle
+            id = "episodeScreenBackground"
+            translation = "[0,120]"
+            width = "1920"
+            height = "930"
+            color = "#000000"
+        />
+        <Label
+            id = "TVShowName"
+            translation = "[50,150]"
+            width = "640"
+            height = "300"
+            color = "#ffffff"
+        />
+        <LabelList
+            id = "seasonsList"
+            translation = "[50,450]"
+            itemSize = "[640,60]"
+            color = "#ffffff"
+            focusedColor = "#000000"
+            vertFocusAnimationStyle = "floatingFocus"
+        >
+        </LabelList>
+        <Label 
+            id = "currentSeason"
+            translation = "[740,150]"
+            width = "1200"
+            height = "60"
+            color = "#FFFFFF"
+        />
+        <!-- check if itemspacing x value matters -->
+        <MarkupList
+            id = "episodesList"
+            itemComponentName = "EpisodeListItem"
+            translation = "[740,210]"
+            itemSize ="[1200,280]"
+            itemSpacing = "[10,10]" 
+            vertFocusAnimationStyle = "floatingFocus"
+        >
+        </MarkupList>
+    </children>
+
+</component>

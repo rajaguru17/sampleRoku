@@ -6,6 +6,8 @@ major_version=1
 minor_version=0
 build_version=00000
 
+bs_libs_required=roku_ads_lib
+
 mm_icon_focus_hd=pkg:/images/rde_mm_focus_hd.jpg
 
 mm_icon_focus_sd=pkg:/images/rde_mm_focus_sd.jpg
@@ -21,4 +23,4 @@ splash_color=#662D91
 
 splash_min_time=1000
 
-ui_resolutions = "hd"
+ui_resolutions=fhd

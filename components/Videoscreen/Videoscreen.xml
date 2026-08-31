@@ -1,0 +1,31 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name="Videoscreen" extends="Group">
+    <interface>
+        <field id="videoContentData" type="assocarray" onChange = "showVideo" />
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+    </interface>
+    <script type="text/brightscript" uri="Videoscreen.brs" />
+    <children>
+        <Rectangle
+            id = "videoBackground"
+            height = "1080"
+            width = "1920"
+            translation = "[0,0]"
+            color = "#000000"
+        />
+        <Video
+            id = "videoPlayer"
+            height = "1080"
+            width = "1920"
+            translation ="[0,0]"
+        />
+        <Timer  
+            id = "videoTimer"
+            duration = "1"
+            repeat = "false"
+        />
+    </children>
+</component>

@@ -1,12 +1,13 @@
 sub init()
-   'm.itemposter = m.top.findNode("itemPoster") 
+    m.itemposter = m.top.findNode("itemPoster") 
     m.itemlabel = m.top.findNode("itemLabel")
     m.itemBackground = m.top.findNode("itemBackground")
 end sub
 
 sub showcontent()
     itemcontent = m.top.itemContent
-   'm.itemposter.uri = itemcontent.HDPosterUrl
+    ' print itemContent.text
+    ' m.itemposter.uri = itemcontent.HDPosterUrl
     m.itemlabel.text = itemcontent.title
 end sub
 

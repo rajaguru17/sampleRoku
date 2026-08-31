@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name="EpisodeListItem" extends="Group">
+    <interface>
+        <field id = "itemContent"  type =  "node"  onChange = "showContent" />
+    </interface>
+    <script type="text/brightscript" uri="EpisodeListItem.brs" />
+    <children>
+        <Group 
+            id = "episode"
+            translation = "[0,0]"
+        >
+        <Poster 
+            id = "episodeThumbNail"
+            height = "280"
+            width = "640"
+            loadHeight = "280.0"
+            loadWidth = "640.0"
+        />
+        <Label 
+            id = "episodeTitle"
+            translation = "[660,40]"
+            width = "600"
+            height = "80"
+            color = "#ffffff"
+            horizAlign = "left"
+        />
+        <Label 
+            id = "episodeDescription"
+            translation = "[660,120]"
+            width = "600"
+            height = "160"
+            color = "#ffffff"
+            horizAlign = "left"
+            maxLines = "4"
+            wrap = "true"
+        />
+        </Group>
+    </children>
+    
+</component>

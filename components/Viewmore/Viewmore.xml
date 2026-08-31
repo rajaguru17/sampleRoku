@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<component name="Viewmorescreen" extends="Group">
+
+    <interface>
+        <field id="viewMoreData" type="assocarray" onChange = "setViewMoreGrid" alwaysNotify = "true" />
+        <field id="keyPressed" type="string" alwaysNotify="true"/>
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id = "detailsData" type="assocarray"/>
+        <field id = "counterValue" type="integer" onChange="showCounter"/>
+    </interface>
+
+    <script type="text/brightscript" uri="Viewmore.brs" />
+    <script type="text/brightscript" uri="pkg:/source/config.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+
+    <children>
+        <Rectangle id = "viewMoreBackground" />
+        <Label 
+            id = "viewMoreTitle"
+            translation = "[50,150]"
+        />
+        <MarkupGrid
+            id = "viewMoreGrid"
+            itemComponentName = "viewMoreGridItem"
+            translation = "[50,200]"
+            itemSize = "[400,200]"
+            itemSpacing = "[20,20]"
+            numColumns  = "4"
+            numRows = "3"
+            vertFocusAnimationStyle = "floatingFocus"
+        />
+    </children>
+
+</component>
