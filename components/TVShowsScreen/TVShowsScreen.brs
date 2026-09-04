@@ -46,6 +46,7 @@ end function
 
 function setFocus()
     m.tvShowsGrid.setFocus(true)
+    showMainSceneCounter(false)
 end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean

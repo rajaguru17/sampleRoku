@@ -6,6 +6,7 @@ sub Main(args as object)
 
     scene = screen.CreateScene("Mainscene")
     screen.Show()
+    ' screen.deepLink = true
 
     while true
         msg = wait(0, port)

@@ -6,7 +6,6 @@
         <field id="keyPressed" type="string" alwaysNotify="true"/>
         <field id="goBack" type = "boolean" alwaysNotify="true" />
         <field id="detailsData" type="assocarray"/>
-        <field id = "counterValue" type="integer" onChange="showCounter"/>
     </interface>
     <script type="text/brightscript" uri="searchScreen.brs" />
     <script type="text/brightscript" uri="pkg:/source/utils.brs" />

@@ -87,6 +87,7 @@ end function
 
 function setFocus()
     m.seasonsList.setFocus(true)
+    showMainSceneCounter(false)
 end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean

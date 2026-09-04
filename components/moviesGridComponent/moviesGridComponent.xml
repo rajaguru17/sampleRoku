@@ -1,0 +1,28 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name = "moviesGridComponent" extends = "Group" >
+ 
+  <interface > 
+  </interface>
+ 
+  <script type = "text/brightscript" uri = "moviesGridComponent.brs" />
+
+  <children >
+    
+    <Poster 
+      id = "moviePoster" 
+      translation = "[ 0, 0 ]" 
+      width = "400" 
+      height = "200" 
+    />
+    
+    <Label 
+      id = "movieLabel" 
+      translation = "[ 20, 264 ]" 
+      horizAlign = "left" 
+      width = "400" 
+    />
+
+  </children>
+
+</component>

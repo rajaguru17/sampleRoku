@@ -16,6 +16,7 @@ function init()
     ' showHomeScreen()
     ' getProfiles()
     m.counterValue = 0
+    ' m.deepLink = true
     showProfileScreen()
     ' background = m.top.findNode("background")
     ' background.color = "0x000000"
@@ -30,9 +31,9 @@ function init()
     
 end function
 
-' function incrementCounter()
-'     m.counter.text = "Clicks = "+m.counterValue.toStr()
-' end function
+function counterVisibility(isVisible)
+    m.counter.visible = isVisible
+end function
 
 function setBackground()
     m.background.color = "0x000000"
@@ -46,7 +47,11 @@ function showProfileScreen()
     'screen.rowData = rowItemConfigWithSizes()
     'screen.rowData = rowData
     screen.observeField("currentSelectionData", "onProfileSelection")
+    
     pushToStack(screen)
+    ' if m.deepLink = true
+        
+    ' end if
 end function
 
 function onProfileSelection(msg as object)
@@ -166,13 +171,13 @@ function onMenuGridItemSelected(msg as object)
     menuItemSelected = msg.getData()
     print menuItemSelected
     if menuItemSelected = 0
-        fakeMsg = {
-            data: true
-            getData: function() as dynamic
-                return m.data
-            end function
-        }
-        goBackToHomeScreen(fakeMsg)
+        ' fakeMsg = {
+        '     data: true
+        '     getData: function() as dynamic
+        '         return m.data
+        '     end function
+        ' }
+        ' goBackToHomeScreen(fakeMsg)
         ' add removeFromStack Loop
     else if menuItemSelected = 1
         showMoviesScreen()
@@ -226,7 +231,6 @@ function goBackToHomeScreen(msg as object)
         removeFromStack()
         setTopChildFocus()
     end if
-    print "mainSceneGoBack pass"
 end function
 
 function removeFromStack()
@@ -237,10 +241,6 @@ end function
 
 function pushToStack(screen)
     m.screenContainer.appendChild(screen)
-    if m.counterValue > 0
-        showCounter()
-    end if
-
 end function
 
 function setTopChildFocus()

@@ -1,11 +1,11 @@
 sub init()
+    showMainSceneCounter(false)
     m.detailsBackground = m.top.findNode("detailsBackground")
     m.detailsTitle = m.top.findNode("detailsTitle")
     m.detailsButtonsGrid = m.top.findNode("detailsButtonsGrid")
     setDetailsButtonsGridItem()
-    m.detailsButtonsGrid.setFocus(true)
     m.detailsDescription = m.top.findNode("detailsDescription")
-    m.counter = m.top.findNode("counter")
+    setFocus()
     print "init of details"
 end sub
 
@@ -41,6 +41,7 @@ end function
 
 function setFocus()
     m.detailsButtonsGrid.setFocus(true)
+    showMainSceneCounter(true)
 end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean

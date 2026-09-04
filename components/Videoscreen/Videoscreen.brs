@@ -3,7 +3,7 @@ sub init()
     m.videoPlayer = m.top.findNode("videoPlayer")
     m.videoTimer = m.top.findNode("videoTimer")
     m.videoTimer.observeField("fire","setFocus")
-end sub
+end sub 
 
 function showVideo(msg as object)
     videoContent = CreateObject("RoSGNode","ContentNode")
@@ -29,6 +29,7 @@ end function
 function setFocus()
     print "Video is being set as focus"
     m.videoPlayer.setFocus(true)
+    showMainSceneCounter(false)
 end function
 
 function RAF()

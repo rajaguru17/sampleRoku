@@ -6,8 +6,14 @@
         <field id="showID" type="string" alwaysNotify = "true" />
         <field id="searchQuery" type="string" />
         <field id="responseData" type="assocarray" />
+        <field id="page" type="integer" />
+        <field id="limit" type="integer" />
     </interface>
 
     <script type="text/brightscript" uri="serverTask.brs" />
+
+    <children>
+        
+    </children>
     
 </component>

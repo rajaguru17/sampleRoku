@@ -6,7 +6,8 @@
         <field id="keyPressed" type="string" alwaysNotify="true"/>
         <field id="goBack" type = "boolean" alwaysNotify="true" />
         <field id="detailsData" type="assocarray"/>
-        <field id = "counterValue" type="integer" onChange="showCounter"/>
+        <!-- <field id="moviesPage" type="integer" />
+        <field id="moviesLimit" type="integer" /> -->
     </interface>
 
     <script type="text/brightscript" uri="Moviesscreen.brs" />
@@ -15,7 +16,7 @@
     <children>
         <Rectangle
             id = "moviesScreenBackground"
-            translation = "[0,150]"
+            translation = "[0,120]"
             width = "1920"
             height = "930"
             color = "#000000"
@@ -40,7 +41,15 @@
             vertAlign = "Top"
             />
         </Group>
-        <MarkupGrid
+        <RowList
+            id = "moviesRowList"
+            translation = "[150,800]"
+            itemSize = "[1920,600]"
+            itemSpacing = "[20,20]"
+            vertFocusAnimationStyle = "fixedFocus"
+            showRowLabel = "[]"
+        />
+        <!-- <MarkupGrid
             id = "moviesScreenGrid"
             itemComponentName = "viewMoreGridItem"
             translation = "[150,800]"
@@ -50,7 +59,7 @@
             numRows = "7"
             focusable = "true"
             vertFocusAnimationStyle = "fixedFocus"
-        />
+        /> -->
     </children>
 
 </component>

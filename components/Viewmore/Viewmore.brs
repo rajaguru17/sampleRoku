@@ -3,13 +3,8 @@ sub init()
     setViewMoreBackground()
     m.viewMoreTitle = m.top.findNode("viewMoreTitle")
     m.viewMoreGrid = m.top.findNode("viewMoreGrid")
-    m.viewMoreGrid.setFocus(true)
-    m.counter = m.top.findNode("counter")
+    setFocus()
 end sub
-
-' function showCounter(clickCount)
-'     m.counter.text = "Clicks = " + clickCount.toStr()
-' end function
 
 function setViewMoreBackground()
     m.viewMoreScreen.width = 1920
@@ -43,6 +38,7 @@ end function
 
 function setFocus()
     m.viewMoreGrid.setFocus(true)
+    showMainSceneCounter(true)
 end function
 
 

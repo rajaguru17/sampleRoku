@@ -1,12 +1,7 @@
 function init()
     m.rowList1 = m.top.findNode("rowList1")
-    m.rowList1.setFocus(true)
-    m.counter = m.top.findNode("counter")
+    setFocus()
 end function
-
-' function showCounter()
-'     m.counter.text = "Clicks = " + m.counterValue.toStr()
-' end function
 
 function setRow()
     rowData = m.top.rowData
@@ -20,13 +15,13 @@ function setRow()
     for each rowItem in rowData
         ' print rowItem
         row = contentNode.createChild("ContentNode")
-            row.title = rowItem.title
-            rowHeights.push(rowItem.height)
-            rowItemSize.push([rowItem.width, rowItem.height])
-            offset.push([ 0, 20 ])
-            rowItemSpacing.push([20,20])
-            
-            RowCounterArr.push(true)
+        row.title = rowItem.title
+        rowHeights.push(rowItem.height)
+        rowItemSize.push([rowItem.width, rowItem.height])
+        offset.push([ 0, 20 ])
+        rowItemSpacing.push([20,20])
+        
+        RowCounterArr.push(true)
         
         for i = 0 to rowItem.items.count() - 1
             item = rowItem.items[i]
@@ -73,10 +68,11 @@ function onRowItemSelected()
     ' print "rowClickedInfo=",rowItemClickedInfo
     ' print "rowInfo=",rowInfo
     
-    if rowItemClickedInfo.tags = "LIVE"
-        m.top.videoContentData = {"title": rowItemClickedInfo.id, "url": "https://lorem.video/720p", "streamformat": "mp4","LIVE":True}
-    else if rowItemClicked.isViewAll = true
+
+    if rowItemClicked.isViewAll = true
         m.top.viewMoreData = {"title":rowNode.title,"rowInfo":rowInfo}
+    else if rowItemClickedInfo.tags = "LIVE"
+        m.top.videoContentData = {"title": rowItemClickedInfo.id, "url": "https://lorem.video/720p", "streamformat": "mp4","LIVE":True}
     else
         m.top.detailsData = {"title":rowItemClickedInfo.id, "image":rowItemClickedInfo.posterurl}
     end if
@@ -107,4 +103,5 @@ end function
 
 function setFocus()
     m.rowList1.setFocus(true)
+    showMainSceneCounter(true)
 end function

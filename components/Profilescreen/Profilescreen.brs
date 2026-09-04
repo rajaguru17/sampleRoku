@@ -97,5 +97,5 @@ end function
 
 function showProfilescreen()
     m.profilesMarkUpGrid.setFocus(true)
-    ' showCounter()
+    showMainSceneCounter(false)
 end function

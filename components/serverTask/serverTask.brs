@@ -1,6 +1,7 @@
 sub init()
     ' m.api = "http://10.1.10.190:5050/"
-    m.api = "http://192.168.8.194:5050/"
+    m.api = "http://192.168.8.208:5050/"
+    print "inside of init serverTask"
 end sub
 
 function getProfileGridConfig()
@@ -14,6 +15,7 @@ function getProfileSliderData()
 end function
 
 function getMenuGridConfig()
+    print "inside menuGridConfig"
     url = m.api + "menuGridConfig"
     getContent(url)
 end function
@@ -33,6 +35,14 @@ function getMoviesScreenGridData()
     getContent(url)
 end function    
 
+function getMoviesRowListData()
+    page = "?page="+m.top.page.toStr()
+    limit = "&limit="+m.top.limit.toStr()
+    params = page+limit
+    url = m.api + "moviesRowListData" + params
+    getContent(url)
+end function
+
 function getTVShowsGridData()
     url = m.api + "tvShowData"
     getContent(url)
@@ -47,6 +57,7 @@ function getEpisodeScreenData()
 end function
 
 function getContent(link)
+    print "Link **** ",link
     urlObject = CreateObject("roUrlTransfer")
     urlObject.setRequest("GET")
     urlObject.SetUrl(link)
@@ -65,6 +76,7 @@ function getContent(link)
 end function
 
 function postContent(link)
+    print "Post Link=",link
     urlObject = CreateObject("roUrlTransfer")
     urlObject.setRequest("POST")
     urlObject.SetUrl(link)

@@ -8,7 +8,6 @@
         <field id="goBack" type = "boolean" alwaysNotify="true" />
         <field id="videoContentData" type="assocarray" />
         <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
-        <field id = "counterValue" type="integer" onChange="showCounter"/>
         
         
     </interface>

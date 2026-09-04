@@ -2,7 +2,6 @@
 <component name="Profilescreen" extends="Group">
     <interface>
         <field id="currentSelectionData" type="assocarray" />
-        <field id = "counterValue" type="integer" onChange="showCounter"/>
     </interface>
 
     <script type="text/brightscript" uri="Profilescreen.brs" />

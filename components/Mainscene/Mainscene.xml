@@ -2,7 +2,8 @@
 <component name="Mainscene" extends="Scene">
 
   <interface>
-    
+    <!-- <field id="deepLink" type="boolean" /> -->
+    <function name="counterVisibility" />
   </interface>
 
    <script type="text/brightscript" uri="Mainscene.brs" />

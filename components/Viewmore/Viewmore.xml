@@ -7,7 +7,6 @@
         <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
         <field id="goBack" type = "boolean" alwaysNotify="true" />
         <field id = "detailsData" type="assocarray"/>
-        <field id = "counterValue" type="integer" onChange="showCounter"/>
     </interface>
 
     <script type="text/brightscript" uri="Viewmore.brs" />

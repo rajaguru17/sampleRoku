@@ -8,7 +8,6 @@
     <field id="viewMoreData" type="assocarray"/>
     <field id = "detailsData" type="assocarray"/>
     <field id = "videoContentData" type = "assocarray"/>
-    <field id = "counterValue" type="integer" onChange="showCounter"/>
   </interface>
 
    <script type="text/brightscript" uri="Homescreen.brs" />
