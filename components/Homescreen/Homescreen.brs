@@ -1,5 +1,9 @@
 function init()
     m.rowList1 = m.top.findNode("rowList1")
+    m.lastTileIndex = 0
+    m.lastRowIndex = 0
+    m.homePage = 1
+    m.homeLimit = 5
     getRowData()
     setFocus()
 end function
@@ -13,15 +17,16 @@ end function
 
 function setRow(msg as object)
     responseData = msg.getData()
-    rowData = responseData.data 'm.top.rowData
+    m.rowData = responseData.data 'm.top.rowData
     contentNode = createObject("roSGNode", "ContentNode")
     rowHeights = []
     rowItemSize = []
     offset = []
     rowItemSpacing = []
     RowCounterArr = []
+    numColumns = 5
     
-    for each rowItem in rowData
+    for each rowItem in m.rowData
         ' print rowItem
         row = contentNode.createChild("ContentNode")
         row.title = rowItem.title
@@ -29,27 +34,33 @@ function setRow(msg as object)
         rowItemSize.push([rowItem.width, rowItem.height])
         offset.push([ 0, 20 ])
         rowItemSpacing.push([20,20])
-        
         RowCounterArr.push(true)
         
-        for i = 0 to rowItem.items.count() - 1
-            item = rowItem.items[i]
+        for each item in rowItem.items
+        ' for i = 0 to rowItem.items.count() - 1
+            ' item = rowItem.items[i]
             itemNode = row.createChild("CustomContentNode")
             itemNode.width = rowItem.width
             itemNode.height = rowItem.height
 
-            if  i = 5
+            if  m.lastTileIndex = numColumns
                 itemNode.title = "View More"
                 itemNode.HDPosterUrl = ""
                 itemNode.isViewAll = true
                 exit for
-            else    
-                itemNode.title = item.text
-                itemNode.HDPosterUrl = item.posterurl
-                itemNode.itemData = item 
-                itemNode.isViewAll = false
-            end if       
+            else
+            ' if m.lastRowTileIndex mod numColumns = 0
+
+            ' end if 
+            itemNode.title = item.text
+            itemNode.HDPosterUrl = item.posterurl
+            itemNode.itemData = item 
+            itemNode.isViewAll = false
+            m.lastTileIndex ++
+            end if
         end for
+        m.lastTileIndex = 0
+        m.lastRowIndex++
        end for
 
     m.rowList1.rowHeights = rowHeights
@@ -63,8 +74,8 @@ function setRow(msg as object)
     print "It is entering setRow"
 end function
 
-function onRowItemSelected()
-    currentRowItemIndex = m.rowList1.rowItemSelected
+function onRowItemSelected(msg as object)
+    currentRowItemIndex = msg.getData()
     rowIndex = currentRowItemIndex[0]
     rowItemIndex = currentRowItemIndex[1]
     rowNode = m.rowList1.content.getChild(rowIndex) 'The row
@@ -72,10 +83,10 @@ function onRowItemSelected()
     rowItemClickedInfo = rowItemClicked.itemData 'The rowChild data
     rowInfo = getRowItems(rowNode.title) 'All the children of that row
 
-    ' print "rowNode=",rowNode
-    ' print "rowItemClicked=",rowItemClicked
-    ' print "rowClickedInfo=",rowItemClickedInfo
-    ' print "rowInfo=",rowInfo
+    print "rowNode=",rowNode
+    print "rowItemClicked=",rowItemClicked
+    print "rowClickedInfo=",rowItemClickedInfo
+    print "rowInfo=",rowInfo
     
 
     if rowItemClicked.isViewAll = true
@@ -89,7 +100,7 @@ function onRowItemSelected()
 end function
 
 function getRowItems(selectedRow)
-    for each item in m.top.rowData
+    for each item in m.rowData
         if item.title = selectedRow
             return item.items
         end if
@@ -105,7 +116,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
         else if key = "down" and m.rowList1.currFocusRow = 3 and m.rowList1.hasFocus()
             rowItemFocused = m.rowList1.rowItemFocused
             m.rowList1.jumpToRowItem = [0,rowItemFocused[1]]
-            m.rowList1.animateToRowItem = 0
+            m.rowList1.animateToItem = 0
         end if
     end if
 end function

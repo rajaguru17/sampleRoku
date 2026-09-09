@@ -23,8 +23,9 @@
       itemSpacing="[0,80]"
       showRowLabel = "[ true ]" 
       rowFocusAnimationStyle="fixedFocus"
+      vertFocusAnimationStyle = "floatingFocus"
       drawFocusFeedback = "true" 
-      numRows = "3"
+      numRows = "4"
     />
   </children>
   
