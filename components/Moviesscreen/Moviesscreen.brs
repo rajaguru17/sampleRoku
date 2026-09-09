@@ -9,7 +9,7 @@ sub init()
     ' getMoviesScreenData()
     ' m.moviesScreenGrid.observeField("itemFocused","onItemFocused")
     m.moviesPage = 1
-    m.moviesLimit = 10
+    m.moviesLimit = 6
     m.lastTileIndex = 0
     m.lastRow = ""
     m.rowHeights = []
@@ -31,23 +31,14 @@ function setMoviesRowList(msg as object)
     moviesData = responseData.data
     height = 200
     numColumns = 4
-    first_iteration = true
+
     for each movie in moviesData
         if m.lastTileIndex mod numColumns = 0
             row = m.contentNode.createChild("ContentNode")
             m.lastRow = row
             m.rowHeights.push(height)
         end if
-
-        ' #method 1
-        ' if m.lastTileIndex mod numColumns < numColumns
-        '     row = getLastRow()
-        ' end if
-        ' movie = moviesData[i]
-
-        ' #method2
-        ' row = getLastRow()
-
+        
         ' #method3
         row = m.lastRow
         movieTile = row.createChild("ContentNode")
@@ -160,3 +151,12 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     end if
     print "MoviesScreen pass"
 end function
+
+        ' #method 1
+        ' if m.lastTileIndex mod numColumns < numColumns
+        '     row = getLastRow()
+        ' end if
+        ' movie = moviesData[i]
+
+        ' #method2
+        ' row = getLastRow()

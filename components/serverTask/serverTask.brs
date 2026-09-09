@@ -1,6 +1,6 @@
 sub init()
-    ' m.api = "http://10.1.10.190:5050/"
-    m.api = "http://192.168.8.149:5050/"
+    m.api = "http://10.1.10.190:5050/"
+    ' m.api = "http://192.168.8.149:5050/"
     ' print "inside of init serverTask"
 end sub
 

@@ -8,7 +8,7 @@ end sub
 function showVideo(msg as object)
     videoContent = CreateObject("RoSGNode","ContentNode")
     videoData = msg.getData()
-    print videoData
+    ' print "videoData = ",videoData
     videoContent.url = videoData.url
     videoContent.title = videoData.title
     videoContent.streamformat = videoData.streamformat
@@ -39,7 +39,7 @@ end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     if press
-        if key = "back"
+        if key = "back" 'or 'return' or 'exit'
             m.top.goBack = true
             return true
         end if

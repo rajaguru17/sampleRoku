@@ -1,10 +1,19 @@
 function init()
     m.rowList1 = m.top.findNode("rowList1")
+    getRowData()
     setFocus()
 end function
 
-function setRow()
-    rowData = m.top.rowData
+function getRowData()
+    serverTask = CreateObject("roSGNode","serverTask")
+    serverTask.observeField("responseData","setRow")
+    serverTask.functionName = "getRowListData"
+    serverTask.control = "run"
+end function
+
+function setRow(msg as object)
+    responseData = msg.getData()
+    rowData = responseData.data 'm.top.rowData
     contentNode = createObject("roSGNode", "ContentNode")
     rowHeights = []
     rowItemSize = []

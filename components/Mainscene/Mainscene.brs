@@ -125,6 +125,7 @@ end function
 function showVideoScreen(msg as object)
     screen = CreateObject("roSGNode","Videoscreen")
     videoData = msg.getData()
+    ' print videoData
     screen.videoContentData = videoData
     screen.observeField("goBack","goBackToHomeScreen")
     pushToStack(screen)

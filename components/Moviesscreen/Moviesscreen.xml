@@ -41,7 +41,7 @@
         </Group>
         <RowList
             id = "moviesRowList"
-            itemComponentName = ""
+            itemComponentName = "movieRowListItem"
             translation = "[150,800]"
             itemSize = "[1920,600]"
             itemSpacing = "[20,20]"
