@@ -8,6 +8,8 @@
         <field id="responseData" type="assocarray" />
         <field id="page" type="integer" />
         <field id="limit" type="integer" />
+        <field id="row" type="integer" />
+        <field id="column" type="integer" />
     </interface>
 
     <script type="text/brightscript" uri="serverTask.brs" />

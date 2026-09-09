@@ -3,13 +3,17 @@ sub init()
     m.theaterDisplayPicture = m.top.findNode("theaterDisplayPicture")
     m.theaterTitle = m.top.findNode("theaterTitle")
     m.moviesRowList = m.top.findNode("moviesRowList")
+    m.contentNode = CreateObject("roSGNode","ContentNode")
+    m.moviesRowList.content = m.contentNode
+    m.moviesRowList.observeField("rowItemFocused","onRowFocused")
     ' getMoviesScreenData()
     ' m.moviesScreenGrid.observeField("itemFocused","onItemFocused")
     m.moviesPage = 1
-    m.moviesLimit = 20
-    m.rowStart = 0
+    m.moviesLimit = 10
+    m.lastTileIndex = 0
+    m.lastRow = ""
+    m.rowHeights = []
     getMoviesRowListData()
-    
     setFocus()    
 end sub
 
@@ -25,52 +29,78 @@ end function
 function setMoviesRowList(msg as object)
     responseData = msg.getData()
     moviesData = responseData.data
-
-    rowHeights = []
-    rowItemSize = []
-    offset = []
-    rowItemSpacing = []
-    rowCounter = []
+    height = 200
     numColumns = 4
-    ' numRows = moviesData.count()\numColumns
-    rowIndex = m.rowStart
-    columns = 4
-
-    contentNode = CreateObject("roSGNode","ContentNode")
-    for i=0 to moviesData.count() - 1
-        ' moviesRow = contentNode.createChild("ContentNode")
-        if i mod columns = 0
-            row = contentNode.createChild("ContentNode")
-            rowHeights.push(200)
-            rowItemSize.push([400,200])
-            offset.push([0,20])
-            rowItemSpacing.push([20,20])
-            rowCounter.push(true)
+    first_iteration = true
+    for each movie in moviesData
+        if m.lastTileIndex mod numColumns = 0
+            row = m.contentNode.createChild("ContentNode")
+            m.lastRow = row
+            m.rowHeights.push(height)
         end if
 
-        movie = moviesData[i]
-        
-        movieTile = row.createChild("ContentNode")
-        movieTile.width = 400
-        movieTile.height = 200
-        movieTile.title = movie.title
-        movieTile.HDPosterUrl = movie.moviePosterUrl
-    end for
-    ' m.moviesRowList.numRows = (moviesData.count()+columns -1)\columns    
-    m.moviesRowList.rowHeights = rowHeights
-    m.moviesRowList.rowItemSize = rowItemSize
-    m.moviesRowList.rowItemSpacing = rowItemSpacing
-    ' m.moviesRowList.rowLabelOffset = offset
-    ' m.moviesRowList.showRowCounter = rowCounter
-    m.moviesRowList.content = contentNode
+        ' #method 1
+        ' if m.lastTileIndex mod numColumns < numColumns
+        '     row = getLastRow()
+        ' end if
+        ' movie = moviesData[i]
 
-    ' if m.moviesRowList.rowFocused = numRows
-    '     m.moviesPage ++
-    '     m.moviesLimit += 20
-    '     m.rowStart += numRows
-    '     ' getMoviesRowListData()
-    ' end if
+        ' #method2
+        ' row = getLastRow()
+
+        ' #method3
+        row = m.lastRow
+        movieTile = row.createChild("ContentNode")
+        movieTile.title = movie.title
+        movieTile.FHDPosterUrl = movie.moviePosterUrl
+        m.lastTileIndex++
+    end for
+    m.moviesRowList.rowHeights = m.rowHeights
+    m.moviesRowList.observeField("rowItemSelected","onItemSelection")
 end function
+
+' function getLastRow()
+'     lastRowIndex = m.contentNode.getChildCount()-1
+'     lastRow = m.contentNode.getChild(lastRowIndex)
+'     return lastRow
+' end function
+
+function onRowFocused(msg as object)
+    responseData = msg.getData()
+    rowIndex = responseData[0]
+    rowItemIndex = responseData[1]
+
+    ' print responseData
+    ' print rowIndex
+    ' print rowItemIndex
+
+    if rowItemIndex > -1 
+        moviesrowFoucsed = m.moviesRowList.content.getChild(rowIndex)
+        currentMovieFocused = moviesrowFoucsed.getChild(rowItemIndex)
+        ' print currentMovieFocused
+        m.theaterDisplayPicture.uri = currentMovieFocused.FHDPosterUrl
+        m.theaterTitle.text = currentMovieFocused.title
+    end if
+
+    if rowIndex = m.contentNode.getChildCount() - 1
+        ' m.lastRow = getLastRow()
+        m.moviesPage ++
+        getMoviesRowListData()
+    end if
+end function
+
+function onItemSelection(msg as object)
+    responseData = msg.getData()
+    rowIndex = responseData[0]
+    rowItemIndex = responseData[1]
+
+    row = m.moviesRowList.content.getChild(rowIndex)
+    movieSelected = row.getChild(rowItemIndex)
+
+    m.top.detailsData = {"title":movieSelected.title,"image":movieSelected.HDPosterUrl}
+end function
+
+
 
 ' function getMoviesScreenData()
 '     serverTask = CreateObject("roSGNode","serverTask")
@@ -114,7 +144,7 @@ end function
 function setFocus()
     ' m.moviesScreenGrid.setFocus(true)
     m.moviesRowList.setFocus(true)
-    ' showMainSceneCounter(false)
+    showMainSceneCounter(false)
 end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean

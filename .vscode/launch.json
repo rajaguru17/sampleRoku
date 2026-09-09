@@ -10,7 +10,7 @@
             "type": "brightscript",
             "request": "launch",
             // "host": "10.1.10.138",
-            "host": "192.168.8.186", 
+            "host": "192.168.8.154", 
             "password": "abcd",
             "rootDir": "${workspaceFolder}",
             "files": [

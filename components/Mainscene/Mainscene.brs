@@ -62,21 +62,12 @@ function onProfileSelection(msg as object)
     m.userName.text = profileData.username
     ' print profileData
     removeFromStack()
-    getRowData()
-    ' showHomeScreen()
+    showHomeScreen()
 end function
 
-function getRowData()
-    serverTask = CreateObject("roSGNode","serverTask")
-    serverTask.observeField("responseData","showHomeScreen")
-    serverTask.functionName = "getRowListData"
-    serverTask.control = "run"
-end function
-
-function showHomeScreen(msg as object)
-    responseData = msg.getData()
+function showHomeScreen()
     screen = CreateObject("roSGNode", "Homescreen")
-    screen.rowData = responseData.data
+    ' screen.rowData = responseData.data
     'screen.rowData = rowData
     screen.observeField("keyPress", "onKeyPress")
     screen.observeField("viewMoreData","showViewMoreScreen")

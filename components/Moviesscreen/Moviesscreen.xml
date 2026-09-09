@@ -6,8 +6,6 @@
         <field id="keyPressed" type="string" alwaysNotify="true"/>
         <field id="goBack" type = "boolean" alwaysNotify="true" />
         <field id="detailsData" type="assocarray"/>
-        <!-- <field id="moviesPage" type="integer" />
-        <field id="moviesLimit" type="integer" /> -->
     </interface>
 
     <script type="text/brightscript" uri="Moviesscreen.brs" />
@@ -43,11 +41,14 @@
         </Group>
         <RowList
             id = "moviesRowList"
+            itemComponentName = ""
             translation = "[150,800]"
             itemSize = "[1920,600]"
             itemSpacing = "[20,20]"
             vertFocusAnimationStyle = "fixedFocus"
             showRowLabel = "[]"
+            rowItemSize = "[[400,200]]"
+            rowItemSpacing = "[[20,20]]"
         />
         <!-- <MarkupGrid
             id = "moviesScreenGrid"
