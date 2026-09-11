@@ -1,6 +1,6 @@
 sub init()
-    m.api = "http://10.1.10.190:5050/"
-    ' m.api = "http://192.168.8.149:5050/"
+    ' m.api = "http://10.1.10.190:5050/"
+    m.api = "http://192.168.8.152:5050/"
     ' print "inside of init serverTask"
 end sub
 
@@ -23,11 +23,21 @@ end function
 function getRowListData()
     page = "?page="+m.top.page.toStr()
     limit = "&limit="+m.top.limit.toStr()
-    row = "&row="+m.top.row.toStr()
-    column = "&column="+m.top.column.toStr()
-    params = page+limit+row+column
-    print "rowListParams = ---"params
-    url = m.api + "rowItemConfigWithSizes" '+params
+    item = "&limit="+m.top.item.toStr()
+    itemLimit= "&itemLimit="+m.top.itemLimit.toStr()
+    params = page + limit + item + itemLimit
+    url = m.api + "homeScreenSetup" +params
+    getContent(url)
+end function
+
+function getHomeRows()
+    rowStart = "?rowStart="  + m.top.rowStart.toStr()
+    rowCount = "&rowCount="  + m.top.rowCount.toStr()
+    itemStart = "&itemStart=" + m.top.itemStart.toStr()
+    itemCount = "&itemCount=" + m.top.itemCount.toStr()
+    params = rowStart + rowCount + itemStart + itemCount
+    url = m.api + "homeRows" + params
+    print "getHomeRows url = "; url
     getContent(url)
 end function
 

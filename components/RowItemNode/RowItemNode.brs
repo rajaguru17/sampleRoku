@@ -8,7 +8,6 @@ sub init()
     m.isViewAll = m.top.findNode("isViewAll")
     m.itembadgeText.font.size = 24
     m.dummy.font.size = 24
-
 end sub
 
 sub showcontent()
@@ -18,14 +17,15 @@ sub showcontent()
     m.itemposter.width = itemcontent.width
     m.itemposter.height = itemcontent.height
     m.itemData = itemcontent.itemData
-
    'print m.itemData
+
    if m.itemData <> invalid
+        ' print "BADGE: text="; itemcontent.title; " type="; m.itemData.type; " tags="; m.itemData.tags; " vis="; m.itemBadge.visible; " tr="; m.itemBadge.translation
+
         m.dummy.text = m.itemData.tags
         localRect = m.dummy.boundingRect()
         dummyHeight = localRect.height +10
         dummyWidth = localRect.width +20
-
 
         m.itembadgeText.text = m.itemData.tags
         m.itembadgeText.height = dummyHeight
@@ -34,6 +34,29 @@ sub showcontent()
         m.itembadgeBg.width =  dummyWidth
 
         m.itemBadge.translation = [itemcontent.width - dummyWidth -10 , 10]
+
+        badgeData = badge()
+        ' print "badgeData=", badgeData
+        ' print "m.itemData.type=",m.itemData.type
+        if  badgeData[m.itemData.type] <> invalid
+            
+            badgeTypeVariable = badgeData[m.itemData.type]
+
+            m.itemBadge.visible = true
+            m.itembadgeText.color = badgeTypeVariable.textColor
+            m.itembadgeBg.color = badgeTypeVariable.bgcolor
+        else
+            m.itemBadge.visible = false
+        end if
+    end if
+
+    ' # if we need ViewAll tile
+    ' if itemContent.isViewAll = true
+    '     m.isViewAll.height = itemcontent.height
+    '     m.isViewAll.width = itemcontent.width
+    '     m.isViewAll.text = itemcontent.title
+
+    ' end if
 
     ' if m.itemContent.type = "view_more"
     '     m.itemposter.visible = false
@@ -62,34 +85,10 @@ sub showcontent()
     '     m.itembadgeBg.color = "0xFFFFFFFF"
 
     ' end if
-
-        badgeData = badge()
-
-        if  badgeData[m.itemData.type] <> invalid
-            
-            badgeTypeVariable = badgeData[m.itemData.type]
-
-            m.itemBadge.visible = true
-            m.itembadgeText.color = badgeTypeVariable.textColor
-            m.itembadgeBg.color = badgeTypeVariable.bgcolor
-        end if
-    else
-        m.itemBadge.visible = false
-    end if
-
-    if itemContent.isViewAll = true
-        m.isViewAll.height = itemcontent.height
-        m.isViewAll.width = itemcontent.width
-        m.isViewAll.text = itemcontent.title
-
-    end if
-
 end sub
 
 sub showfocus()
-    
 end sub
 
 sub showrowfocus()
-
 end sub

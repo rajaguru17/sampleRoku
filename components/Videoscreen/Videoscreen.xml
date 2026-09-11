@@ -31,7 +31,35 @@
         <Group
             id="buttonsUI"
         >
-
+            <Label
+                id ="runTime"
+                translation = "[100,985]" 
+                width = "100"
+            />
+            <Rectangle
+                id= "grayBarRectangle"
+                translation="[200,1000]"
+                width="1520"
+                height="5"
+                color = "#808080"
+            />
+            <Rectangle
+                id= "progreessingBarRectangle"
+                translation="[200,1000]"
+                width="0"
+                height="5"
+                color = "#FF0000"
+            />
+            <Label
+                id ="totalDuration"
+                translation = "[1725,985]" 
+                width = "100"
+            />
         </Group>
+        <Timer
+            id = "buttonsTimer"
+            duration = "5"
+            repeat = "false"
+        />
     </children>
 </component>

@@ -1,10 +1,10 @@
 Library "Roku_Ads.brs"
-sub Main(args as object)
+sub Main()
     screen = CreateObject("roSGScreen")
     port = CreateObject("roMessagePort")
     screen.SetMessagePort(port)
 
-    scene = screen.CreateScene("Mainscene")
+    screen.CreateScene("Mainscene")
     screen.Show()
     ' screen.deepLink = true
 

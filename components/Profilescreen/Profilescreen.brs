@@ -3,10 +3,10 @@ sub init()
     m.metaDataTitle = m.top.findNode("metaDataTitle")
     m.metaDataGenre = m.top.findNode("metaDataGenre")
     m.metaDataHighlight = m.top.findNode("metaDataHighlight")
+    
     m.sliderTimer = m.top.findNode("sliderTimer")
     m.sliderTimer.observeField("fire","onSliderChange")
     m.profileChooseProfileInfo = m.top.findNode("profileChooseProfileInfo")
-    m.counter = m.top.findNode("counter")
 
     m.profileScreen = m.top.findNode("profilesBackground")
     setProfilesBackground()
@@ -17,10 +17,6 @@ sub init()
     showProfilescreen()
     m.sliderTimer.control = "start"
 end sub
-
-' function showCounter(clickCount)
-'     m.counter.text = "Clicks = " + clickCount.toStr()
-' end function
 
 function setProfilesBackground()
         m.profileChooseProfileInfo.font.size = 24

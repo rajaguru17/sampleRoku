@@ -2,15 +2,11 @@ sub init()
     m.searchMiniKeyboard = m.top.findNode("searchMiniKeyboard")
     m.nodeFocused = m.searchMiniKeyboard
     m.searchMiniKeyboard .textEditBox.textColor = "#FFFFFF"
-    text = m.searchMiniKeyboard.text
+    ' text = m.searchMiniKeyboard.text
     m.searchMiniKeyboard.observeField("text","findSearchedContent")
     m.allContentGrid = m.top.findNode("allContentGrid")
     setFocus()
 end sub
-
-' function showCounter(clickCount)
-'     m.counter.text = "Clicks = " + clickCount.toStr()
-' end function
 
 function findSearchedContent(msg as object)
     searchText = msg.getData()
