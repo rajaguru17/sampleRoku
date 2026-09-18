@@ -1,0 +1,38 @@
+<component name="videoButtonsGridItem" extends="Group">
+    <interface>
+        <field id = "focusPercent" type = "float" onChange = "showfocus" alwaysNotify = "true"/>
+        <field id = "gridHasFocus" type = "boolean" onChange = "showfocus" alwaysNotify = "true"/>
+        <field id = "itemContent" type = "node" onChange = "showcontent"/>
+    </interface>
+
+    <script type="text/brightscript" uri="videoButtonsGridItem.brs" />
+
+    <children>
+        <group
+            id = "button">
+            <Poster
+                id = "buttonBackground"
+                translation = "[0,0]"
+                width = "75"
+                height = "75"
+                loadWidth = "75.0"
+                loadHeight = "75.0"
+            />
+            <Poster
+                id = "buttonIcon"
+                translation = "[0,0]" 
+                width = "75"
+                height = "75"
+                loadWidth = "75.0"
+                loadHeight = "75.0"
+            />
+            <!-- <Label
+                id = "buttonName"
+                translation = "[0,75]"
+                height = "75"
+                width = "75"
+                horizAlign = "center"
+            /> -->
+        </group>
+    </children>
+</component>

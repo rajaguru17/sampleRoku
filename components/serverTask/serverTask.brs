@@ -1,6 +1,6 @@
 sub init()
     ' m.api = "http://10.1.10.190:5050/"
-    m.api = "http://192.168.8.152:5050/"
+    m.api = "http://192.168.8.232:5050/"
     ' print "inside of init serverTask"
 end sub
 
@@ -20,15 +20,15 @@ function getMenuGridConfig()
     getContent(url)
 end function
 
-function getRowListData()
-    page = "?page="+m.top.page.toStr()
-    limit = "&limit="+m.top.limit.toStr()
-    item = "&limit="+m.top.item.toStr()
-    itemLimit= "&itemLimit="+m.top.itemLimit.toStr()
-    params = page + limit + item + itemLimit
-    url = m.api + "homeScreenSetup" +params
-    getContent(url)
-end function
+' function getRowListData()
+'     page = "?page="+m.top.page.toStr()
+'     limit = "&limit="+m.top.limit.toStr()
+'     item = "&limit="+m.top.item.toStr()
+'     itemLimit= "&itemLimit="+m.top.itemLimit.toStr()
+'     params = page + limit + item + itemLimit
+'     url = m.api + "homeScreenSetup" +params
+'     getContent(url)
+' end function
 
 function getHomeRows()
     rowStart = "?rowStart="  + m.top.rowStart.toStr()
@@ -46,10 +46,10 @@ function getSearchedContent()
     postContent(url)
 end function
 
-function getMoviesScreenGridData()
-    url = m.api + "moviesScreenData"
-    getContent(url)
-end function    
+' function getMoviesScreenGridData()
+'     url = m.api + "moviesScreenData"
+'     getContent(url)
+' end function    
 
 function getMoviesRowListData()
     page = "?page="+m.top.page.toStr()

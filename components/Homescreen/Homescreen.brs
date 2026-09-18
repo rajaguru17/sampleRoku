@@ -1,25 +1,30 @@
 sub init()
     m.rowList1 = m.top.findNode("rowList1")
 
+    ' ---- paging config ----
     m.rowPageSize  = 4
     m.itemPageSize = 5
     m.prefetch     = 2
     m.labelHeight  = 40
 
+    ' ---- persistent content tree: created ONCE ----
     m.content = CreateObject("roSGNode", "ContentNode")
     m.rowList1.content = m.content
 
+    ' ---- master copies of the parallel size arrays ----
     m.rowHeights     = []
     m.rowItemSize    = []
     m.rowItemSpacing = []
     m.rowLabelOffset = []
     m.showRowCounter = []
 
+    ' ---- paging state ----
     m.rowMeta     = []
     m.totalRows   = 0
     m.rowsLoading = false
     m.tasks       = {}
 
+    ' ---- obseerve fields ----
     m.rowList1.observeField("rowItemFocused",  "onRowItemFocused")
     m.rowList1.observeField("rowItemSelected", "onRowItemSelected")
 
@@ -198,4 +203,3 @@ sub setFocus()
     m.rowList1.setFocus(true)
     showMainSceneCounter(true)
 end sub
-

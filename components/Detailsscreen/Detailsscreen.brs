@@ -35,7 +35,7 @@ function onButtonClicked(msg as object)
     clickedButton = msg.getData()
     print clickedButton
     if clickedButton = 0
-        m.top.videoContentData = {"title":m.detailsTitle.text,"url": "pkg://Videos/1h.mp4" ,"streamformat": "mp4"}
+        m.top.videoContentData = {"title":m.detailsTitle.text,"url": "https://lorem.video/720p" ,"streamformat": "mp4"}
     end if
 end function
 

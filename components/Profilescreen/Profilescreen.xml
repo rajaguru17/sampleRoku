@@ -47,7 +47,7 @@
         </Group>
         <Group id = "profileTopLeftLogo">
             <Poster
-                uri = "pkg:/images/netflix_logo.png"
+                uri = "pkg://images/netflix_logo.png"
                 width = "230"
                 height = "80"
                 translation = "[60,20]"
