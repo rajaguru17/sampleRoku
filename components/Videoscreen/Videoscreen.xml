@@ -2,7 +2,7 @@
 
 <component name="Videoscreen" extends="Group">
     <interface>
-        <field id="videoContentData" type="assocarray" alwaysNotify="true" onChange = "showVideo" />
+        <field id="videoContentData" type="assocarray" alwaysNotify="true" onChange = "setVideoData" />
         <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
         <field id="keyPressed" type="string" alwaysNotify="true"/>
         <field id="goBack" type = "boolean" alwaysNotify="true" />
@@ -35,6 +35,18 @@
                 id ="runTime"
                 translation = "[100,925]" 
                 width = "100"
+            />
+            <Label
+                id = "titleInfo"
+                translation = "[100,750]" 
+                width = "500"
+                height = "115"
+            />
+            <Label 
+                id = "episodeInfo"
+                translation = "[100,840]"
+                width = "500"
+                height = "100"
             />
             <Rectangle
                 id= "grayBarRectangle"
@@ -75,6 +87,11 @@
             id = "seekTimer"
             duration = "1"
             repeat = "false"
+        />
+        <Timer
+            id = "moveTimer"
+            duration = "0.3"
+            repeat = "true"
         />
     </children>
 </component>

@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<component name="RAFTask" extends="Task">
+
+    <interface>
+        <field id="adPods" type="array" />
+        <field id="myAdUrl" type="string" alwaysNotify = "true" />
+        <field id="adHolder" type="node" />
+        <field id="shouldPlayContent" type="boolean" />
+    </interface>
+
+    <script type="text/brightscript" uri="RAFTask.brs" />
+
+    
+    
+</component>

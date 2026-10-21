@@ -1,10 +1,14 @@
 sub init()
+    'findNode's
     m.TVShowName = m.top.findNode("TVShowName")
     m.seasonsList = m.top.findNode("seasonsList")
-    m.seasonsList.observeField("itemFocused","setSeasonTitle")
     m.currentSeason = m.top.findNode("currentSeason")
     m.episodesList = m.top.findNode("episodesList")
     m.counter = m.top.findNode("counter")
+
+    'ObserveFields
+    m.seasonsList.observeField("itemFocused","setSeasonTitle")
+
     setFocus()
 end sub
 
@@ -23,19 +27,20 @@ end function
 
 function setEpisodeScreen(msg as object)
     responseData = msg.getData()
-    tvShowData = responseData.data
-    print responseData
-    print tvShowData
+    m.tvShowData = responseData.data
+    ' print responseData
+    ' print tvShowData
 
     ' Set TVShow Title
-    m.TVShowName.text = tvShowData.tvShowTitle
-
+    m.TVShowName.text = m.tvShowData.tvShowTitle
+    
     ' Set Seasons List
-    m.seasonsData = tvShowData.seasons
+    m.seasonsData = m.tvShowData.seasons
     contentNode = CreateObject("roSGNode","ContentNode")
     for each item in m.seasonsData
         itemNode = contentNode.createChild("ContentNode")
         itemNode.TITLE = "Season "+ item.seasonNumber
+        itemNode.seasonNumber = item.seasonNumber
     end for
     m.seasonsList.content = contentNode
 
@@ -57,21 +62,23 @@ end function
     ' Set Season Title
 function setSeasonTitle(msg as object)
     seasonFocusedIndex = msg.getData()
-    print "seasonFocusedIndex = " seasonFocusedIndex
+    m.seasonIndex = seasonFocusedIndex + 1
+    ' print "seasonFocusedIndex = " seasonFocusedIndex + 1
     if seasonFocusedIndex > -1 and seasonFocusedIndex <> invalid
         seasonListItemFocused = m.seasonsList.content.getChild(seasonFocusedIndex)
-        print "seasonListItemFocused = ", seasonListItemFocused
+        ' print "seasonListItemFocused = ", seasonListItemFocused
         m.currentSeason.text = seasonListItemFocused.title
 
         ' set Episodes List
         ' Raja's way of show only episodes of that season
-        focusedSeason = m.seasonsData[seasonFocusedIndex]
-        episodeData = focusedSeason.episodes
+        m.focusedSeason = m.seasonsData[seasonFocusedIndex]
+        episodeData = m.focusedSeason.episodes
         episodeContentNode = CreateObject("roSGNode","ContentNode")
         for each item in episodeData
             itemNode = episodeContentNode.createChild("ContentNode")
             itemNode.title = "Episode " + item.episodeNumber
             itemNode.HDPosterUrl = item.posterurl
+            itemNode.episodeNumber = item.episodeNumber
         end for
         m.episodesList.content = episodeContentNode
     end if
@@ -81,8 +88,10 @@ end function
 function onEpisodeSelection(msg as object)
     itemSelectedIndex = msg.getData()
     episodeSelected = m.episodesList.content.getChild(itemSelectedIndex)
-    ' print episodeSelected
-    m.top.videoContentData = {"title":episodeSelected.title,"url": "https://lorem.video/720p" ,"streamformat": "mp4"}
+    print "focusedSeason = ", m.focusedSeason
+    ' print "episodeSelected = ",episodeSelected
+    m.top.videoContentData = {"title":m.tvShowData.tvShowTitle, "url": "https://lorem.video/720p" ,
+                            "streamformat": "mp4", "season":"s"+m.focusedSeason.seasonNumber,      "episode":"e"+episodeSelected.episodeNumber+" "+episodeSelected.title}
 end function
 
 function setFocus()

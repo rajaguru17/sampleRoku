@@ -1,4 +1,4 @@
-Library "Roku_Ads.brs"
+' Library "Roku_Ads.brs"
 sub Main()
     screen = CreateObject("roSGScreen")
     port = CreateObject("roMessagePort")

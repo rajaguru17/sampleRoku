@@ -14,19 +14,18 @@ function getTVShows()
     serverTask.observeField("responseData","setTVShowsGrid")
     serverTask.functionName = "getTVShowsGridData"
     serverTask.control = "run"
-    print "ran getTVShows"
+    ' print "ran getTVShows"
 end function
 
 function setTVShowsGrid(msg as object)
     print "entered setTVShowsGrid"
     responseData = msg.getData()
     m.tvShowGridData = responseData.data
-    print "respondeData =", m.tvShowGridData
+    ' print "respondeData =", m.tvShowGridData
     contentNode = CreateObject("roSGNode","ContentNode")
-    ' contentNode.addField("") #Add description field
 
     for each item in m.tvShowGridData
-        print "each item in tvShwoGridData =",item
+        ' print "each item in tvShwoGridData =",item
         itemNode = contentNode.createChild("ContentNode")
         itemNode.id = item.id
         itemNode.title = item.title

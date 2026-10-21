@@ -1,6 +1,6 @@
 sub init()
     ' m.api = "http://10.1.10.190:5050/"
-    m.api = "http://192.168.8.232:5050/"
+    m.api = "http://192.168.8.186:5050/"
     ' print "inside of init serverTask"
 end sub
 
@@ -65,10 +65,10 @@ function getTVShowsGridData()
 end function
 
 function getEpisodeScreenData()
-    print "showID type = ",type(m.top.showID)
-    print "showID in serverTask = ", m.top.showID
+    ' print "showID type = ",type(m.top.showID)
+    ' print "showID in serverTask = ", m.top.showID
     url = m.api + "tvShowData/" + m.top.showID
-    print "url =",url
+    ' print "url =",url
     getContent(url)
 end function
 
@@ -92,7 +92,7 @@ function getContent(link)
 end function
 
 function postContent(link)
-    print "Post Link=",link
+    ' print "Post Link=",link
     urlObject = CreateObject("roUrlTransfer")
     urlObject.setRequest("POST")
     urlObject.SetUrl(link)

@@ -99,7 +99,6 @@ function showEpisodesScreen(msg as object)
     screen.observeField("goBack","goBackToHomeScreen")
     screen.observeField("keyPressed","onKeyPress")
     screen.observeField("videoContentData","showVideoScreen")
-    ' screen.observeField("detailsData","showDetailsScreen") <- There are no details here
     pushToStack(screen)
 end function
 
@@ -124,9 +123,7 @@ end function
 
 function showVideoScreen(msg as object)
     screen = CreateObject("roSGNode","Videoscreen")
-    videoData = msg.getData()
-    ' print videoData
-    screen.videoContentData = videoData
+    screen.videoContentData = msg.getData()
     screen.observeField("goBack","goBackToHomeScreen")
     pushToStack(screen)
 end function
