@@ -81,8 +81,17 @@ function setSeasonTitle(msg as object)
             itemNode.episodeNumber = item.episodeNumber
         end for
         m.episodesList.content = episodeContentNode
+        if m.global.deepLink <> invalid and (m.global.deepLink.mediaType = "episode" or m.global.deepLink.mediaType = "series")
+            episodeToBePlayed = m.focusedSeason.episodes
+            playEpisode(episodeToBePlayed[0])
+        end if
     end if
     m.episodesList.observeField("itemSelected","onEpisodeSelection")
+end function
+
+function playEpisode(episodeSelected)
+    m.top.videoContentData = {"title":m.tvShowData.tvShowTitle, "url": "https://lorem.video/720p" ,"streamformat": "mp4", "season":"s"+m.focusedSeason.seasonNumber,      "episode":"e"+episodeSelected.episodeNumber+" "+episodeSelected.title}
+    m.global.deepLink = invalid
 end function
 
 function onEpisodeSelection(msg as object)
@@ -90,8 +99,7 @@ function onEpisodeSelection(msg as object)
     episodeSelected = m.episodesList.content.getChild(itemSelectedIndex)
     print "focusedSeason = ", m.focusedSeason
     ' print "episodeSelected = ",episodeSelected
-    m.top.videoContentData = {"title":m.tvShowData.tvShowTitle, "url": "https://lorem.video/720p" ,
-                            "streamformat": "mp4", "season":"s"+m.focusedSeason.seasonNumber,      "episode":"e"+episodeSelected.episodeNumber+" "+episodeSelected.title}
+    playEpisode(episodeSelected)
 end function
 
 function setFocus()

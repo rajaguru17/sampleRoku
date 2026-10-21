@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="LoginScreen" extends="Group">
+
+    <!-- bs:disable-next-line: 1008 -->
+    <interface>
+        <field id="loginSuccess" type="boolean" alwaysNotify="true" />
+        <field id="goBack" type = "boolean" alwaysNotify="true" />
+        <field id="isFocused" type="boolean" alwaysNotify="true" onChange="setFocus" />
+
+    </interface>
+
+    <script type="text/brightscript" uri="LoginScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+
+    <children>
+        <channelStore
+            id = "channelStore"
+        />
+        <Rectangle
+            id = "loginBackground"
+            translation = "[0,0]"
+            height = "1080"
+            width = "1920"
+            color = "#000000"
+        />
+        <Group id = "loginVisual">
+            <Group
+                id = "leftHalf"
+                translation = "[270,240]"
+            >
+                <Label
+                    id = "QRHeading"
+                    width="340" 
+                    translation = "[0,0]"
+                    horizAlign = "Center"
+                    text = "QR Code Login"
+                />
+                <Rectangle
+                    id = "QRBox"
+                    translation = "[0,50]"
+                    color = "#FFFFFF"
+                    width="340" 
+                    height="430"
+                >
+                    <Poster
+                        id="qrImage" 
+                        width="280" 
+                        height="280" 
+                        translation="[30, 30]"
+                        uri = "pkg:/images/qr.png"
+                    />
+                    <Label
+                        id="codeCaption" 
+                        text="Device Code"
+                        width="340"  
+                        translation="[0, 330]"
+                        horizAlign = "Center"
+                        color="#000000"
+                    />
+                    <Label
+                        id="code" 
+                        text="0 1 4 5"
+                        width="340"  
+                        translation="[0, 370]"
+                        horizAlign = "Center"
+                        color="#000000"
+                    />
+                </Rectangle>
+            </Group>
+            <Rectangle
+                id = "divider"
+                translation = "[959,270]"
+                height = "540"
+                width = "2"
+                color = "#FFFFFF"
+            />
+            <!-- <LayoutGroup id="loginSection" translation="[1300, 300]"
+                    layoutDirection="vert" horizAlignment="left"
+                    itemSpacings="[20, 60, 40, 60, 80]"> -->
+            <Group
+                id = "rightHalf"
+                translation = "[1100,270]"
+            >
+                <Label 
+                    id="loginTitle" 
+                    translation = "[0,0]"
+                    text="LOGIN" 
+                    width="550"
+                    horizAlign="Center" 
+                    color="#FFFFFF"
+                />    
+                <Label 
+                    id="errorLabel" 
+                    translation = "[0,50]"
+                    text="Invalid login credentials" 
+                    width="550"
+                    horizAlign="Center" 
+                    color="#E3242B" 
+                    visible="false" 
+                />
+
+                <TextEditBox 
+                    id="usernameField" 
+                    translation = "[0,150]"
+                    hintText="Username" 
+                />
+                <TextEditBox 
+                    id="passwordField" 
+                    translation = "[0,225]"
+                    hintText="Password"
+                    secureMode = "true"
+                />
+
+                <Rectangle 
+                    id="signInButton" 
+                    translation = "[0,350]"
+                    width="550" 
+                    height="80" 
+                    color="0xF5B100FF"
+                >
+                    <Label 
+                        id="signInLabel" 
+                        text="SIGN IN" 
+                        width="550"
+                        height="80"
+                        horizAlign = "Center"
+                        vertAlign = "Center"
+                        color="#000000"
+                    />
+                </Rectangle>
+            </Group>
+        </Group>
+        <Animation id="slideAnimation" duration="0.1" easeFunction="outQuad">
+            <Vector2DFieldInterpolator
+                id="slideUp"
+                key="[0.0, 1.0]"
+                fieldToInterp="loginVisual.translation" 
+            />
+        </Animation>
+
+        <Keyboard
+            id = "loginKeyboard"
+            translation = "[250,650]"
+            visible = "false"
+            showTextEditBox = "false"
+        />
+    </children>
+
+</component>

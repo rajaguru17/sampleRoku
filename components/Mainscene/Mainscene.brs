@@ -1,6 +1,7 @@
 function init()
+    m.global.accessToken = readKeyInReg("accessToken")
     m.counter = m.top.findNode("counter")
-    ' m.profileIcon = m.top.findNode("profileIcon")
+    m.profileIcon = m.top.findNode("profileIcon")
     m.iconImage = m.top.findNode("iconImage")
     m.userName = m.top.findNode("userName")
     m.switchProfile = m.top.findNode("switchProfile")
@@ -13,11 +14,16 @@ function init()
     getMenuGrid()
     ' setMovieGrid()
     m.screenContainer = m.top.findNode("screenContainer")
-    ' showHomeScreen()
+    print "17th line ->",m.global.accessToken
+    if hasAccessToken()
+        showProfileScreen()
+    else
+        showHomeScreen()
+    end if
     ' getProfiles()
     m.counterValue = 0
     ' m.deepLink = true
-    showProfileScreen()
+    ' 
     ' background = m.top.findNode("background")
     ' background.color = "0x000000"
     ' background.width = 1920
@@ -49,9 +55,6 @@ function showProfileScreen()
     screen.observeField("currentSelectionData", "onProfileSelection")
     
     pushToStack(screen)
-    ' if m.deepLink = true
-        
-    ' end if
 end function
 
 function onProfileSelection(msg as object)
@@ -60,6 +63,7 @@ function onProfileSelection(msg as object)
     m.userName.font.size = 30
     m.iconImage.uri = profileData.poster
     m.userName.text = profileData.username
+    m.switchProfile.visible = true
     ' print profileData
     removeFromStack()
     showHomeScreen()
@@ -73,7 +77,13 @@ function showHomeScreen()
     screen.observeField("viewMoreData","showViewMoreScreen")
     screen.observeField("videoContentData","showVideoScreen")
     screen.observeField("detailsData","showDetailsScreen")
+    screen.observeField("deepLinkTVShowNav","showTVShowsScreen")
     pushToStack(screen)
+    if m.global.deepLink <> invalid and (m.global.deepLink.mediaType = "season" or m.global.deepLink.mediaType = "episode" or m.global.deepLink.mediaType = "series")
+        showID = m.global.deepLink.contentID
+        createEpisodeScreen(showID)
+        print "createEpisodeScreen in showHomeScreen"
+    end if 
 end function
 function showMoviesScreen()
     print "entered showMoviesScreen"
@@ -94,14 +104,19 @@ end function
 
 function showEpisodesScreen(msg as object)
     print "entered showEpisodesscreen"
+    showID = msg.getData()
+    createEpisodeScreen(showID)
+end function
+
+function createEpisodeScreen(showID)
+    print "entered createEpisodeScreen"
     screen = CreateObject("roSGNode","Episodesscreen")
-    screen.showID = msg.getData()
     screen.observeField("goBack","goBackToHomeScreen")
     screen.observeField("keyPressed","onKeyPress")
     screen.observeField("videoContentData","showVideoScreen")
+    screen.showID = showID
     pushToStack(screen)
 end function
-
 function showViewMoreScreen(msg as object)
     screen = CreateObject("roSGNode","Viewmorescreen")
     viewMoreData = msg.getData()
@@ -114,19 +129,25 @@ end function
 function showDetailsScreen(msg as object)
     screen = CreateObject("roSGNode","Detailsscreen")
     detailsData = msg.getData()
-    screen.detailsData = detailsData
     screen.observeField("goBack","goBackToHomeScreen")
     screen.observeField("keyPressed","onKeyPress")
     screen.observeField("videoContentData","showVideoScreen")
+    screen.detailsData = detailsData
     pushToStack(screen)
 end function
 
 function showVideoScreen(msg as object)
-    screen = CreateObject("roSGNode","Videoscreen")
-    screen.videoContentData = msg.getData()
-    screen.observeField("goBack","goBackToHomeScreen")
-    pushToStack(screen)
+    if hasAccessToken()
+        screen = CreateObject("roSGNode","Videoscreen")
+        screen.videoContentData = msg.getData()
+        screen.observeField("goBack","goBackToHomeScreen")
+        pushToStack(screen)
+    else 
+        m.fromMenu = false
+        showLoginScreen()
+    end if
 end function
+
 function showSearchScreen()
     print "entered showSearchScreen"
     screen = CreateObject("roSGNode","searchScreen")
@@ -135,6 +156,28 @@ function showSearchScreen()
     screen.observeField("detailsData","showDetailsScreen")
     pushToStack(screen)
 end function
+function showLoginScreen()
+    screen = CreateObject("roSGNode","LoginScreen")
+    screen.observeField("loginSuccess","onLoginSuccess")
+    screen.observeField("goBack","goBackToHomeScreen")
+    pushToStack(screen)
+    setTopChildFocus()
+end function
+
+sub onLoginSuccess()
+    getMenuGrid()
+    if m.fromMenu
+        removeAllFromStack()
+        showProfileScreen()
+        return
+    else
+        removeFromStack()
+        screenCount = m.screenContainer.getChildCount()
+        topChild = m.screenContainer.getChild(screenCount - 1)
+        topChild.callFunc("moveToVideo")
+    end if
+    setTopChildFocus()
+end sub
 
 function getMenuGrid()
     serverTask = CreateObject("roSGNode","serverTask")
@@ -142,6 +185,7 @@ function getMenuGrid()
     serverTask.functionName = "getMenuGridConfig"
     serverTask.control = "run"
 end function
+
 function setMovieGrid(msg as object)
     responseData = msg.getData()
     gridData = responseData.data
@@ -153,9 +197,10 @@ function setMovieGrid(msg as object)
         ' itemNode.HDPosterUrl = item.posterurl
     end for
     m.movieGrid.content = contentNode
+
 end function
 
-function onMenuGridItemSelected(msg as object)
+function onMenuGridItemSelected(msg as object) as void
     print "onMenuGridItemSelected"
     menuItemSelected = msg.getData()
     print menuItemSelected
@@ -174,7 +219,19 @@ function onMenuGridItemSelected(msg as object)
         showTVShowsScreen()
     else if menuItemSelected = 4
         showSearchScreen()
-    else if menuItemSelected = m.movieGrid.content.getChildCount() - 1
+    else if menuItemSelected = 6
+        logInButton = m.movieGrid.content.getChild(menuItemSelected)
+        if logInButton.title = "Log Out"
+            print "---entering the right LogOUT---"
+            m.global.accessToken = invalid
+            deleteKeyInReg("accessToken")
+            m.profileIcon.visible = false
+            getMenuGrid()
+            return
+        end if
+        m.fromMenu = true
+        showLoginScreen()
+    else if menuItemSelected = m.movieGrid.content.getChildCount() - 2
         m.counterValue ++
         showCounter()
     end if
@@ -206,7 +263,7 @@ end function
 '     ' for i = labelObj.count() - 1 to 0 step -1
 '     '     labelItem = labelObj[i]
 '     '     newLabel = createObject("roSGNode", "Label")
-'     '     newLabel.id = "layoutLabel_" + i.toStr()
+'     '     newLabel.id = "layoutLabel_" + i.toStr() 
 '     '     newLabel.text = labelItem.text
 '     '     newLabel.color = "0xFFFFFFFF"
 '     '     newLabel.font = "font:MediumBoldSystemFont"
@@ -228,6 +285,12 @@ function removeFromStack()
     m.screenContainer.removeChild(topChild)
 end function
 
+function removeAllFromStack()
+    for i = 1 to m.screenContainer.getChildCount()
+        removeFromStack()
+    end for
+end function
+
 function pushToStack(screen)
     m.screenContainer.appendChild(screen)
 end function
@@ -247,6 +310,7 @@ end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
     if press
+        print key,"down Handled here"
         if key = "down" and m.movieGrid.hasFocus()
             setTopChildFocus()
         end if

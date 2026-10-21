@@ -8,6 +8,7 @@
     <field id="viewMoreData" type="assocarray"/>
     <field id = "detailsData" type="assocarray"/>
     <field id = "videoContentData" type = "assocarray"/>
+    <field id="deepLinkTVShowNav" type="boolean" />
   </interface>
 
    <script type="text/brightscript" uri="Homescreen.brs" />

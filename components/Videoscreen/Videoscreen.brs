@@ -4,6 +4,10 @@ sub init()
     m.moveValue = 0
     m.moveBtn = ""
     m.midRoll = false
+    m.rafTaskBoolean = false
+    m.midRollDone = false
+    m.midPoint = 0.0
+    m.seekValue = 0
     'findNode's
     m.videoBackground = m.top.findNode("videoBackground")       'video
     m.videoPlayer = m.top.findNode("videoPlayer")
@@ -29,48 +33,52 @@ sub init()
     m.buttonsTimer.observeField("fire","fadeOutUI")
     m.seekTimer.observeField("fire","seeking")
     m.moveTimer.observeField("fire","onMoving")
-    
     'TEMP
 end sub 
 
-function onStateChanged(msg as object)
-    respondeData = msg.getData()
-    ' print "state=",respondeData
-    if respondeData = "finished"
-        RAF_custom()
-    end if
-end function
-
-function RAF_custom()
+function RAF_custom() as void
     rafTask = CreateObject("roSGNode","RAFTask")
-    rafTask.observeField("shouldPlayContent","showVideo")
+    rafTask.observeField("shouldPlayContent","playbackAfterMidroll")
     ' rafTask.adPods = m.adPods
-    if m.myAdUrl <> invalid then rafTask.myAdUrl = m.myAdUrl else showVideo()
+    ' if m.myAdUrl <> invalid then rafTask.myAdUrl = m.myAdUrl else showVideo()
     rafTask.adHolder = m.top.getScene()
     rafTask.functionName = "control_play"
-    print "rafTask Boolean = ",rafTask.shouldPlayContent
     rafTask.control = "run"
+    ' m.rafTaskBoolean = rafTask.shouldPlayContent
+    print "rafTask Boolean = ",rafTask.shouldPlayContent
+end function
+
+function playbackAfterMidroll(msg as object)
+    shouldPlayContent = msg.getData()
+    print "shouldPlayContent = ,"shouldPlayContent
+    if shouldPlayContent:
+        print "entering midroll"
+        m.midRollDone = true
+        m.videoPlayer.content = invalid
+        showVideo()
+
+        ' m.seekValue = m.currentPlayBackTime
+        ' m.seekTimer.control = "start"
+        ' m.videoPlayer.control = "play"
+        ' m.videoPlayer.seek = m.currentPlayBackTime
+        ' print"VPS = & CPBT =",m.videoPlayer.seek,m.currentPlayBackTime
+        ' m.seekValue = m.currentPlayBackTime 
+        ' m.seekTimer.control = "start"
+        ' m.videoPlayer.setFocus(true)
+        ' m.UI.visible = true
+        ' m.buttonsTimer.control = "start"
+    end if
 end function
 
 function setVideoData(msg as object)
     m.videoData = msg.getData()
-    RAF_custom()
+    m.currentPlayBackTime = 0
+    RAF_custom() 
+    ' checkAuth()
+    showVideo()
 end function
 
 function showVideo() as void
-    if m.videoPlayer.state = "finished"
-        m.top.goBack = true
-    end if
-
-    if m.midRoll:
-        print "entering midroll"
-        m.videoPlayer.seek = m.currentPlayBackTime
-        m.videoPlayer.control = "play"
-        m.videoPlayer.setFocus(true)
-        m.midRoll = false
-        return
-    end if
-
     'Initial setup
     setFocus()
     'Video
@@ -93,6 +101,9 @@ function showVideo() as void
     m.videoPlayer.enableUI = False
     m.videoPlayer.enableTrickPlay = False
     m.videoTimer.control ="start"
+    m.seekTimer.control = "start"
+
+    'check variables
 
     'Exceptions
     if m.videoData.LIVE = true
@@ -102,7 +113,6 @@ function showVideo() as void
 
     'Timer setup
     m.buttonsTimer.control = "start"
-
 end function
 
 function fadeOutUI()
@@ -110,8 +120,31 @@ function fadeOutUI()
     m.videoPlayer.setFocus(true)
 end function
 
+function onStateChanged(msg as object) as void
+    respondeData = msg.getData()
+    ' print "state=",respondeData
+    if respondeData = "playing"
+        m.midPoint = int(m.videoPlayer.duration/2)
+    end if
+    if respondeData = "finished"
+        ' RAF_custom() <- Post roll ads
+        m.top.goBack = true
+        return
+    end if
+    if respondeData = "stop"
+        
+    end if
+end function
 function onPlaying()
-    m.midPoint = int(m.videoPlayer.duration/2)
+    print "posi____ =", m.videoPlayer.position
+    if  not m.midRollDone and m.midPoint> 0 and m.videoPlayer.position >= m.midPoint
+        print "midpoint = ",m.midPoint
+        m.currentPlayBackTime = m.videoPlayer.position
+        print "CPBT = ",m.currentPlayBackTime
+        m.videoPlayer.control = "stop"
+        RAF_custom()
+    end if
+
     'Time setup
     videoLength= m.videoPlayer.duration
     currentPosition = m.videoPlayer.position
@@ -119,6 +152,7 @@ function onPlaying()
     if m.totalDuration.text = ""
         m.totalDuration.text = changeTimeFormat(videoLength)
     end if
+
     'Progress bar setup
     progressWidth = (currentPosition / videoLength) * m.grayBar.width
     if progressWidth > m.grayBar.width
@@ -129,11 +163,6 @@ function onPlaying()
     end if
     m.progressBar.width=progressWidth
 
-    if m.videoPlayer.position = m.midPoint
-        m.currentPlayBackTime = m.videoPlayer.position
-        m.midRoll = true
-        RAF_custom()
-    end if
 end function
 
 function setButtonGrid()
@@ -284,9 +313,19 @@ function onPlayClicked()
         m.buttonsTimer.control = "start"
     end if
 end function
+
 function seeking()
-    m.videoPlayer.seek = m.videoPlayer.position + m.seekValue
+    print "CPBT in seeking = ", m.currentPlayBackTime
+    m.videoPlayer.seek = int(m.currentPlayBackTime)
+
+    ' print "m.videPlayer.Position = ", m.videoPlayer.position
+    ' print "m.seekValue = ", m.seekValue
+
+    ' m.videoPlayer.seek = m.videoPlayer.position + m.seekValue
+    
+    ' print"m.videoPlayer.seek = ", m.videoPlayer.seek
 end function
+
 function onMoving()
     target = m.videoPlayer.position
     if m.moveBtn = "fastforward" 

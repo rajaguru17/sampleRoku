@@ -71,16 +71,33 @@ function setProfilesMarkUpGrid(msg as object)
         itemNode.HDPosterUrl = item.posterurl
     end for
     m.profilesMarkUpGrid.content = contentNode
+    lastSavedProfile = readKeyInReg("lastSavedProfile")
+    lastSaveProfileIndex = 0
+    for lastProfileIndex=0 to profilesGridData.Count()-1
+            if profilesGridData[lastProfileIndex].text = lastSavedProfile
+                lastSaveProfileIndex = lastProfileIndex
+                m.profilesMarkUpGrid.jumpToItem = lastProfileIndex
+            print "implemented DeepLink lastSavedProfile =", lastSavedProfile
+            end if
+        end for
+    if m.global.deeplink <> invalid
+        changeScreen(lastSaveProfileIndex)
+    end if
     m.profilesMarkUpGrid.observeField("itemSelected","screenChangeFunc")
     
 end function 
 
-function screenChangeFunc()
-    currentChildIndex = m.profilesMarkUpGrid.itemSelected
-    currentProfileSelection = m.profilesMarkUpGrid.content.getChild(currentChildIndex)
+function changeScreen(lastSaveIndex)
+    currentProfileSelection = m.profilesMarkUpGrid.content.getChild(lastSaveIndex)
     image = currentProfileSelection.HDPosterUrl
     text = currentProfileSelection.title
     m.top.currentSelectionData = { "poster": image, "username": text }
+    saveKeyInReg("lastSavedProfile",text)
+end function
+
+function screenChangeFunc(msg as object)
+    currentChildIndex = msg.getData()
+    changeScreen(currentChildIndex)
 end function
 
 function onSliderChange()

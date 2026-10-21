@@ -29,8 +29,47 @@ sub init()
     m.rowList1.observeField("rowItemSelected", "onRowItemSelected")
 
     requestPage(0, m.rowPageSize, 0, m.itemPageSize)
+
+    if m.global.deepLink <> invalid
+        onDeepLinkReq()
+    end if
+
     setFocus()
 end sub
+
+sub onDeepLinkReq()
+    if m.global.deepLink.mediaType = "movie"
+        serverTask = CreateObject("roSGNode","serverTask")
+        serverTask.observeField("responseData","onDeepLinkServerResponse")
+        serverTask.functionName = "getSingleMovieData"
+        serverTask.control = "run"
+    else if m.global.deepLink.mediaType = "season"
+        serverTask = CreateObject("roSGNode","serverTask")
+        serverTask.observeField("responseData","onDeepLinkServerResponse")
+        serverTask.functionName = "getEpisodeScreenData"
+        serverTask.control = "run"
+    else if m.global.deepLink.mediaType = "episode" or m.global.deepLink.mediaType = "series"
+        serverTask = CreateObject("roSGNode","serverTask")
+        serverTask.observeField("responseData","onDeepLinkServerResponse")
+        serverTask.functionName = "getEpisodeScreenData"
+        serverTask.control = "run"
+    end if
+end sub
+
+function onDeepLinkServerResponse(msg as object) as void
+    responseData = msg.getData()
+    if responseData = "" OR responseData = invalid
+        print "Content no longer available"
+        m.global.deepLink = invalid
+        return
+    end if
+    movie = responseData.data
+    if m.global.deepLink.mediaType = "movie"
+        m.top.detailsData = { title: movie.title, image: movie.moviePosterUrl }
+    else if m.global.deepLink.mediaType = "tvshow"
+        m.top.deepLinkTVShowNav = true
+    end if
+end function
 
 sub requestPage(rowStart , rowCount , itemStart, itemCount)
     key = rowStart.toStr() + "_" + itemStart.toStr()

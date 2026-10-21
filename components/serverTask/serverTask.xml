@@ -3,6 +3,8 @@
 <component name="serverTask" extends="Task">
 
     <interface>
+        <field id="loginID" type="string" />
+        <field id="password" type="string" />
         <field id="showID" type="string" alwaysNotify = "true" />
         <field id="searchQuery" type="string" />
         <field id="responseData" type="assocarray" />

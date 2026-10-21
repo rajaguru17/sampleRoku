@@ -32,6 +32,9 @@ function setTVShowsGrid(msg as object)
         itemNode.HDPosterUrl = item.posterurl
     end for
     m.tvShowsGrid.content = contentNode
+    if m.global.deepLink <> invalid and (m.global.deepLink.mediaType = "season")
+        m.top.showID = m.global.deepLink.contentId
+    end if
     m.tvShowsGrid.observeField("itemSelected","OnShowSelection")
 end function
 
